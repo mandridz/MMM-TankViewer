@@ -33,7 +33,10 @@ Module.register("MMM-TankViewer", {
 		console.log("---> Sending Socket Notification to node_helper");
 
 		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
-		self.sendSocketNotification("MESSAGE", { "config": self.config });
+
+		setInterval(function() {
+			self.sendSocketNotification("MESSAGE", { "config": self.config });
+		}, this.config.interval);
 
 		// Schedule update timer.
 		//this.getData();
