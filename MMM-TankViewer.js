@@ -12,7 +12,7 @@ Module.register("MMM-TankViewer", {
 		updateInterval: 60000,
 		retryDelay: 5000,
 
-		host: '127.0.0.1',
+		host: '10.0.3.3',
 		port: 8080,
 		path: '',
 		interval: 10000,
