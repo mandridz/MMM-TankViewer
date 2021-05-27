@@ -26,31 +26,30 @@ module.exports = NodeHelper.create({
 		if (notification === "WS_CONNECT") {
 			// Connect event will be handeled internally
 
-			console.log("---> Notification WS_CONNECT: ");
+			console.log("---> Notification WS_CONNECT");
 
 			self.config = payload.config;
 			self.connect(payload.config);
 
-			return;
+			if(self.ws && self.ws.readyState === WebSocket.OPEN) {
+				self.ws.send(self.config.message, function ack(error){
+					if(error) {
+						self.error("Error while sending message: ", self.config.message);
+					}
+				});
+			} else {
+				self.debug("Can not send notification because WebSocket is not yet connected!", notification)
+			}
 		} else if (notification === "WS_DISCONNECT") {
 			// Disconnect event will be handeled internally
+
+			console.log("---> Notification WS_DISCONNECT");
+
 			self.config = undefined;
 			self.disconnect();
 
 			return;
 		}
-
-		// Forward all other socket notifications
-		if(self.ws && self.ws.readyState === WebSocket.OPEN) {
-			self.ws.send(self.config.message, function ack(error){
-				if(error) {
-					self.error("Error while sending message: ", self.config.message);
-				}
-			});
-		} else {
-			self.debug("Can not send notification because WebSocket is not yet connected!", notification)
-		}
-
 	},
 
 	connect: function(config, callback) {

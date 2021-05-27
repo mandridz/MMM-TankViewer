@@ -30,7 +30,7 @@ Module.register("MMM-TankViewer", {
 		//Flag for check if module is loaded
 		this.loaded = false;
 
-		console.log("---> Sending Socket Notification nj node_helper");
+		console.log("---> Sending Socket Notification to node_helper");
 
 		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
 
