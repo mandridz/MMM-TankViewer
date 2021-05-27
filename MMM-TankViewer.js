@@ -121,6 +121,7 @@ Module.register("MMM-TankViewer", {
 			var wrapperCanalizationTank = document.createElement("div");
 
 			var labelCanalizationTank = document.createElement("label");
+			labelCanalizationTank.class = "label";
 			labelCanalizationTank.innerHTML = "Канализационный колодец: ";
 
 			var labelCanalizationTankValue = document.createElement("label");
