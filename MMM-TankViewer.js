@@ -144,7 +144,7 @@ Module.register("MMM-TankViewer", {
 			var labelDrainageTankValue = document.createElement("label");
 			labelDrainageTankValue.className = "value";
 			//labelDrainageTankValue.innerHTML = this.dataRequest.title + " m";
-			labelDrainageTankValue.innerHTML = this.dataRequest ? "1" : "0";
+			labelDrainageTankValue.innerHTML = this.dataRequest ? JSON.stringify(this.dataRequest) : "0";
 
 			wrapperDrainageTank.appendChild(labelDrainageTank);
 			wrapperDrainageTank.appendChild(labelDrainageTankValue);
