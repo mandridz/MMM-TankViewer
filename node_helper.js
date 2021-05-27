@@ -98,7 +98,7 @@ module.exports = NodeHelper.create({
 
 	sendMessage: function(event) {
 		var self = this;
-		console.log("Send event: ", event.payload);
+		self.debug("Send event: ", event.payload);
 
 		console.log("---> Sending Socket Notification to Main module: " + JSON.stringify(event));
 
