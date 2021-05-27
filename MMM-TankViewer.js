@@ -138,14 +138,6 @@ Module.register("MMM-TankViewer", {
 			wrapper.appendChild(wrapperDrainageTank);
 		}
 
-		// Data from helper
-		if (this.dataNotification) {
-			var wrapperDataNotification = document.createElement("div");
-			// datanotification
-			wrapperDataNotification.innerHTML =  "UPDATE: " + this.dataNotification.date;
-
-			wrapper.appendChild(wrapperDataNotification);
-		}
 		return wrapper;
 	},
 
