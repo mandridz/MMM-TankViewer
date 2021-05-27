@@ -4,15 +4,5 @@
   "description": "Show info about deep in canalization and drainage collectors",
   "main": "MMM-TankViewer.js",
   "author": "yen",
-  "license": "MIT",
-  "devDependencies": {
-    "grunt": "latest",
-    "grunt-eslint": "latest",
-    "grunt-jsonlint": "latest",
-    "grunt-markdownlint": "^1.0.13",
-    "grunt-stylelint": "latest",
-    "grunt-yamllint": "latest",
-    "stylelint-config-standard": "latest",
-    "time-grunt": "latest"
-  }
+  "license": "MIT"
 }
