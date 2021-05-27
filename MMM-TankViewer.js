@@ -122,7 +122,7 @@ Module.register("MMM-TankViewer", {
 
 			var labelCanalizationTank = document.createElement("label");
 			labelCanalizationTank.className = "label";
-			labelCanalizationTank.innerHTML = "Канализационный колодец: ";
+			labelCanalizationTank.innerHTML = "Канализационный коллектор: ";
 
 			var labelCanalizationTankValue = document.createElement("label");
 			labelCanalizationTankValue.className = "value";
@@ -136,7 +136,7 @@ Module.register("MMM-TankViewer", {
 
 			var labelDrainageTank = document.createElement("label");
 			labelDrainageTank.className = "label";
-			labelDrainageTank.innerHTML = "Дренажный колодец: ";
+			labelDrainageTank.innerHTML = "Дренажный коллектор: ";
 
 			var labelDrainageTankValue = document.createElement("label");
 			labelDrainageTankValue.className = "value";
