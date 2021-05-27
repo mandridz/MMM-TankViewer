@@ -129,7 +129,17 @@ module.exports = NodeHelper.create({
 		}
 	},
 
+	debug: function() {
+		var self = this;
+		if(self.config.debug) {
+			console.log.apply(self, arguments);
+		}
+	},
 
+	error: function() {
+		var self = this;
+		console.error.apply(self, arguments);
+	},
 
 
 
