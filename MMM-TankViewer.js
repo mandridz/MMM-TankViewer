@@ -36,6 +36,7 @@ Module.register("MMM-TankViewer", {
 			self.updateDom();
 		}, this.config.interval);
 
+		console.log.apply("---> WS_CONNECT Sent!");
 
 		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
 	},
