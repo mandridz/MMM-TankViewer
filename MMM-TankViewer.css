@@ -10,5 +10,10 @@
  */
 
 .label {
-  font-size: 10px;
+  font-size: 14;
+}
+
+.value {
+  font-size: 18;
+  color: '#3fd6db';
 }
