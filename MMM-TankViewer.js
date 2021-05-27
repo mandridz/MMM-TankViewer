@@ -10,7 +10,14 @@
 Module.register("MMM-TankViewer", {
 	defaults: {
 		updateInterval: 60000,
-		retryDelay: 5000
+		retryDelay: 5000,
+
+		host: '127.0.0.1',
+		port: 8080,
+		path: '',
+		interval: 10000,
+		message: '',
+		debug: false
 	},
 
 	requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -27,7 +34,7 @@ Module.register("MMM-TankViewer", {
 		this.getData();
 		setInterval(function() {
 			self.updateDom();
-		}, this.config.updateInterval);
+		}, this.config.interval);
 	},
 
 	/*
@@ -73,11 +80,11 @@ Module.register("MMM-TankViewer", {
 	 *  If empty, this.config.updateInterval is used.
 	 */
 	scheduleUpdate: function(delay) {
-		var nextLoad = this.config.updateInterval;
+		var nextLoad = this.config.interval;
 		if (typeof delay !== "undefined" && delay >= 0) {
 			nextLoad = delay;
 		}
-		nextLoad = nextLoad ;
+		nextLoad = nextLoad;
 		var self = this;
 		setTimeout(function() {
 			self.getData();
@@ -87,6 +94,7 @@ Module.register("MMM-TankViewer", {
 	getDom: function() {
 		var self = this;
 
+/*
 		// create element wrapper for show into the module
 		var wrapper = document.createElement("div");
 		// If this.dataRequest is not empty
@@ -104,12 +112,44 @@ Module.register("MMM-TankViewer", {
 			wrapper.appendChild(labelDataRequest);
 			wrapper.appendChild(wrapperDataRequest);
 		}
+*/
+
+		var wrapper = document.createElement("div");
+
+		if (this.dataRequest) {
+			// CanalizationTank
+			var wrapperCanalizationTank = document.createElement("div");
+
+			var labelCanalizationTank = document.createElement("label");
+			labelCanalizationTank.innerHTML = "Канализационный колодец: ";
+
+			var labelCanalizationTankValue = document.createElement("label");
+			labelCanalizationTankValue.innerHTML = this.dataRequest.title;
+
+			wrapperCanalizationTank.appendChild(labelCanalizationTank);
+			wrapperCanalizationTank.appendChild(labelCanalizationTankValue);
+
+			// DrainageTank
+			var wrapperDrainageTank = document.createElement("div");
+
+			var labelDrainageTank = document.createElement("label");
+			labelDrainageTank.innerHTML = "Дренажный колодец: ";
+
+			var labelDrainageTankValue = document.createElement("label");
+			labelDrainageTankValue.innerHTML = this.dataRequest.title;
+
+			wrapperDrainageTank.appendChild(labelDrainageTank);
+			wrapperDrainageTank.appendChild(labelDrainageTankValue);
+
+			wrapper.appendChild(wrapperCanalizationTank);
+			wrapper.appendChild(wrapperDrainageTank);
+		}
 
 		// Data from helper
 		if (this.dataNotification) {
 			var wrapperDataNotification = document.createElement("div");
-			// translations  + datanotification
-			wrapperDataNotification.innerHTML =  this.translate("UPDATE") + ": " + this.dataNotification.date;
+			// datanotification
+			wrapperDataNotification.innerHTML =  "UPDATE: " + this.dataNotification.date;
 
 			wrapper.appendChild(wrapperDataNotification);
 		}
@@ -124,15 +164,6 @@ Module.register("MMM-TankViewer", {
 		return [
 			"MMM-TankViewer.css",
 		];
-	},
-
-	// Load translations files
-	getTranslations: function() {
-		//FIXME: This can be load a one file javascript definition
-		return {
-			en: "translations/en.json",
-			es: "translations/es.json"
-		};
 	},
 
 	processData: function(data) {

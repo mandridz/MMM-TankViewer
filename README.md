@@ -2,7 +2,7 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Todo: Insert description here!
+Show info about deep in canalization and drainage collectors
 
 ## Using the module
 
@@ -24,5 +24,9 @@ var config = {
 
 | Option           | Description
 |----------------- |-----------
-| `option1`        | *Required* DESCRIPTION HERE
-| `option2`        | *Optional* DESCRIPTION HERE TOO <br><br>**Type:** `int`(milliseconds) <br>Default 60000 milliseconds (1 minute)
+| `host`           | *Required* Remote Host
+| `port`           | *Required* Remote Port
+| `path`           | *Required* Path to remote WebSocket Server
+| `interval`       | *Required* Interval to send message to Server (ms) (Default 10000 ms)
+| `message`        | *Required* Message to Server
+| `debug`          | *Optional* Show Debug info in console (Default false)

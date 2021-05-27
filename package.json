@@ -1,7 +1,7 @@
 {
   "name": "MMM-TankViewer",
   "version": "1.0.0",
-  "description": "Todo: Insert description here!",
+  "description": "Show info about deep in canalization and drainage collectors",
   "main": "MMM-TankViewer.js",
   "author": "yen",
   "license": "MIT",
