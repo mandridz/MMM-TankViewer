@@ -135,6 +135,7 @@ Module.register("MMM-TankViewer", {
 			var wrapperDrainageTank = document.createElement("div");
 
 			var labelDrainageTank = document.createElement("label");
+			labelDrainageTank.className = "label";
 			labelDrainageTank.innerHTML = "Дренажный колодец: ";
 
 			var labelDrainageTankValue = document.createElement("label");
