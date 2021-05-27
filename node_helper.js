@@ -21,7 +21,7 @@ module.exports = NodeHelper.create({
 	socketNotificationReceived: function(notification, payload) {
 		var self = this;
 
-		console.log.apply("---> Working notification system. Notification:", notification, "payload: ", payload);
+		console.log("---> Working notification system. Notification:", notification, "payload: ", payload);
 
 		if (notification === "MMM-TankViewer-NOTIFICATION_TEST") {
 			// Send notification
