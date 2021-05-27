@@ -35,6 +35,9 @@ Module.register("MMM-TankViewer", {
 		setInterval(function() {
 			self.updateDom();
 		}, this.config.interval);
+
+
+		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
 	},
 
 	/*
@@ -141,7 +144,7 @@ Module.register("MMM-TankViewer", {
 			var labelDrainageTankValue = document.createElement("label");
 			labelDrainageTankValue.className = "value";
 			//labelDrainageTankValue.innerHTML = this.dataRequest.title + " m";
-			labelDrainageTankValue.innerHTML = "3.24 m";
+			labelDrainageTankValue.innerHTML = this.dataRequest;
 
 			wrapperDrainageTank.appendChild(labelDrainageTank);
 			wrapperDrainageTank.appendChild(labelDrainageTankValue);
@@ -184,7 +187,11 @@ Module.register("MMM-TankViewer", {
 
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
-		if(notification === "MMM-TankViewer-NOTIFICATION_TEST") {
+		if (notification === "MMM-TankViewer-NOTIFICATION_TEST") {
+			// set dataNotification
+			this.dataNotification = payload;
+			this.updateDom();
+		} else if (notification === "MMM-TankViewer-REQUEST_VALUE") {
 			// set dataNotification
 			this.dataNotification = payload;
 			this.updateDom();
