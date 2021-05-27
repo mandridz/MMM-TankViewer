@@ -21,13 +21,13 @@ module.exports = NodeHelper.create({
 	socketNotificationReceived: function(notification, payload) {
 		var self = this;
 
-		console.log("---> Working notification system. Notification:", notification, "payload: ", payload);
+		console.log("---> Working notification system. Notification: ", notification, "payload: ", payload);
 
-		if (notification === "MMM-TankViewer-NOTIFICATION_TEST") {
-			// Send notification
-			this.sendNotificationTest(this.anotherFunction()); //Is possible send objects :)
-		} else if (notification === "WS_CONNECT") {
+		if (notification === "WS_CONNECT") {
 			// Connect event will be handeled internally
+
+			console.log("---> Notification WS_CONNECT: ");
+
 			self.config = payload.config;
 			self.connect(payload.config);
 
@@ -44,7 +44,7 @@ module.exports = NodeHelper.create({
 		if(self.ws && self.ws.readyState === WebSocket.OPEN) {
 			self.ws.send(self.config.message, function ack(error){
 				if(error) {
-					self.error("Error while sending obj: ", obj);
+					self.error("Error while sending message: ", self.config.message);
 				}
 			});
 		} else {
@@ -98,6 +98,9 @@ module.exports = NodeHelper.create({
 	sendMessage: function(event) {
 		var self = this;
 		self.debug("Send event: ", event.payload);
+
+		console.log("---> Sending Socket Notification to Main module: " + event.payload);
+
 		self.sendSocketNotification("MMM-TankViewer-REQUEST_VALUE", event.payload);
 	},
 
@@ -141,33 +144,4 @@ module.exports = NodeHelper.create({
 		console.error.apply(self, arguments);
 	},
 
-
-
-
-
-
-
-
-
-
-
-	// Example function send notification test
-	sendNotificationTest: function(payload) {
-		this.sendSocketNotification("MMM-TankViewer-NOTIFICATION_TEST", payload);
-	},
-
-	// this you can create extra routes for your module
-	extraRoutes: function() {
-		var self = this;
-		this.expressApp.get("/MMM-TankViewer/extra_route", function(req, res) {
-			// call another function
-			values = self.anotherFunction();
-			res.send(values);
-		});
-	},
-
-	// Test another function
-	anotherFunction: function() {
-		return {date: new Date()};
-	}
 });

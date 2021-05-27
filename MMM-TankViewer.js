@@ -9,8 +9,8 @@
 
 Module.register("MMM-TankViewer", {
 	defaults: {
-		updateInterval: 60000,
-		retryDelay: 5000,
+		//updateInterval: 60000,
+		//retryDelay: 5000,
 
 		host: '10.0.3.3',
 		port: 8080,
@@ -30,12 +30,15 @@ Module.register("MMM-TankViewer", {
 		//Flag for check if module is loaded
 		this.loaded = false;
 
+		console.log("---> Sending Socket Notification nj node_helper");
+
+		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
+
 		// Schedule update timer.
 		//this.getData();
-		setInterval(function() {
+		//setInterval(function() {
 			//self.updateDom();
-			self.sendSocketNotification("WS_CONNECT", { "config": self.config });
-		}, this.config.interval);
+		//}, this.config.interval);
 	},
 
 	/*
@@ -44,6 +47,7 @@ Module.register("MMM-TankViewer", {
 	 * get a URL request
 	 *
 	 */
+	 /*
 	getData: function() {
 		var self = this;
 
@@ -72,6 +76,7 @@ Module.register("MMM-TankViewer", {
 		};
 		dataRequest.send();
 	},
+	*/
 
 
 	/* scheduleUpdate()
@@ -80,6 +85,7 @@ Module.register("MMM-TankViewer", {
 	 * argument delay number - Milliseconds before next update.
 	 *  If empty, this.config.updateInterval is used.
 	 */
+	 /*
 	scheduleUpdate: function(delay) {
 		var nextLoad = this.config.interval;
 		if (typeof delay !== "undefined" && delay >= 0) {
@@ -91,29 +97,10 @@ Module.register("MMM-TankViewer", {
 			self.getData();
 		}, nextLoad);
 	},
+	*/
 
 	getDom: function() {
 		var self = this;
-
-/*
-		// create element wrapper for show into the module
-		var wrapper = document.createElement("div");
-		// If this.dataRequest is not empty
-		if (this.dataRequest) {
-			var wrapperDataRequest = document.createElement("div");
-			// check format https://jsonplaceholder.typicode.com/posts/1
-			wrapperDataRequest.innerHTML = this.dataRequest.title;
-
-			var labelDataRequest = document.createElement("label");
-			// Use translate function
-			//             this id defined in translations files
-			labelDataRequest.innerHTML = this.translate("TITLE");
-
-
-			wrapper.appendChild(labelDataRequest);
-			wrapper.appendChild(wrapperDataRequest);
-		}
-*/
 
 		var wrapper = document.createElement("div");
 
@@ -180,18 +167,14 @@ Module.register("MMM-TankViewer", {
 
 		// the data if load
 		// send notification to helper
-		this.sendSocketNotification("MMM-TankViewer-NOTIFICATION_TEST", data);
+		//this.sendSocketNotification("MMM-TankViewer-NOTIFICATION_TEST", data);
 	},
 
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
-		if (notification === "MMM-TankViewer-NOTIFICATION_TEST") {
-			// set dataNotification
-			this.dataNotification = payload;
-			this.updateDom();
-		} else if (notification === "MMM-TankViewer-REQUEST_VALUE") {
+		if (notification === "MMM-TankViewer-REQUEST_VALUE") {
 
-			console.log("Receved notification MMM-TankViewer-REQUEST_VALUE" + payload);
+			console.log("---> Receved notification MMM-TankViewer-REQUEST_VALUE: " + payload);
 
 			// set dataNotification
 			this.dataNotification = payload;
