@@ -97,7 +97,7 @@ module.exports = NodeHelper.create({
 
 	sendMessage: function(event) {
 		var self = this;
-		self.debug("Send event: ", event);
+		self.debug("Send event: ", event.payload);
 		self.sendSocketNotification("MMM-TankViewer-REQUEST_VALUE", event.payload);
 	},
 

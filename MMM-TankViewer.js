@@ -31,14 +31,12 @@ Module.register("MMM-TankViewer", {
 		this.loaded = false;
 
 		// Schedule update timer.
+		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
+
 		this.getData();
 		setInterval(function() {
 			self.updateDom();
 		}, this.config.interval);
-
-		console.log("---> WS_CONNECT Sent!");
-
-		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
 	},
 
 	/*
@@ -193,6 +191,9 @@ Module.register("MMM-TankViewer", {
 			this.dataNotification = payload;
 			this.updateDom();
 		} else if (notification === "MMM-TankViewer-REQUEST_VALUE") {
+
+			console.log("Receved notification MMM-TankViewer-REQUEST_VALUE" + payload);
+
 			// set dataNotification
 			this.dataNotification = payload;
 			this.updateDom();
