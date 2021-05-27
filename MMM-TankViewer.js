@@ -31,11 +31,10 @@ Module.register("MMM-TankViewer", {
 		this.loaded = false;
 
 		// Schedule update timer.
-		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
-
 		this.getData();
 		setInterval(function() {
-			self.updateDom();
+			//self.updateDom();
+			self.sendSocketNotification("WS_CONNECT", { "config": self.config });
 		}, this.config.interval);
 	},
 
