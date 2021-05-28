@@ -33,7 +33,7 @@ module.exports = NodeHelper.create({
 
 			setTimeout(() => {
 
-				console.log("---> SET TIMEOUT");
+				console.log("---> SET TIMEOUT END SEND SOCKET NOTIFICATION");
 
 				this.sendSocketNotification('MSG', {message: 'test'});
 
