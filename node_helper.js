@@ -32,6 +32,9 @@ module.exports = NodeHelper.create({
 			self.connect(payload.config);
 
 			setTimeout(() => {
+
+				console.log("---> SET TIMEOUT");
+
 				if(self.ws && self.ws.readyState === WebSocket.OPEN) {
 					self.ws.send(self.config.message, function ack(error){
 						if(error) {
