@@ -31,15 +31,17 @@ module.exports = NodeHelper.create({
 			self.config = payload.config;
 			self.connect(payload.config);
 
-			if(self.ws && self.ws.readyState === WebSocket.OPEN) {
-				self.ws.send(self.config.message, function ack(error){
-					if(error) {
-						self.error("Error while sending message: ", self.config.message);
-					}
-				});
-			} else {
-				self.debug("Can not send notification because WebSocket is not yet connected!", notification)
-			}
+			setTimeout(() => {
+				if(self.ws && self.ws.readyState === WebSocket.OPEN) {
+					self.ws.send(self.config.message, function ack(error){
+						if(error) {
+							self.error("Error while sending message: ", self.config.message);
+						}
+					});
+				} else {
+					self.debug("Can not send notification because WebSocket is not yet connected!", notification)
+				}
+			}, 10000);
 
 			return;
 		} else if (notification === "WS_DISCONNECT") {
@@ -136,13 +138,13 @@ module.exports = NodeHelper.create({
 	debug: function() {
 		var self = this;
 		if(config.debug) {
-			console.log.apply(self, arguments);
+			console.log(self, arguments);
 		}
 	},
 
 	error: function() {
 		var self = this;
-		console.error.apply(self, arguments);
+		console.error(self, arguments);
 	},
 
 });
