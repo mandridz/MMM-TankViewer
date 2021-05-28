@@ -35,6 +35,8 @@ module.exports = NodeHelper.create({
 
 				console.log("---> SET TIMEOUT");
 
+				this.sendSocketNotification('MSG', {message: 'test'});
+
 				if(self.ws && self.ws.readyState === WebSocket.OPEN) {
 					self.ws.send(self.config.message, function ack(error){
 						if(error) {
