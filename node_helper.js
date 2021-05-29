@@ -5,7 +5,9 @@
  * MIT Licensed.
  */
 
-require( 'console-stamp' )( console );
+ require( 'console-stamp' )( console, {
+     format: ':date().blue.bgWhite.underline :label(7)'
+ } );
 
 var NodeHelper = require("node_helper");
 const WebSocket = require("ws");
