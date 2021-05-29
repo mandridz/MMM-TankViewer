@@ -8,8 +8,8 @@
  */
 
 Module.register("MMM-TankViewer", {
-	require( 'console-stamp' )( console );
-	
+	require( 'console-stamp' )( console ),
+
 	defaults: {
 		//updateInterval: 60000,
 		//retryDelay: 5000,
