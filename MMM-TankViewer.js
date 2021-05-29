@@ -9,8 +9,8 @@
 
 Module.register("MMM-TankViewer", {
 	defaults: {
-		//updateInterval: 60000,
-		//retryDelay: 5000,
+		updateInterval: 60000,
+		retryDelay: 5000,
 
 		host: '10.0.3.3',
 		port: 8080,
@@ -32,16 +32,17 @@ Module.register("MMM-TankViewer", {
 
 		console.log("*** Sending Socket Notification to node_helper");
 
-		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
+		//self.sendSocketNotification("WS_CONNECT", { "config": self.config });
 
 		//this.updateDom();
 
+/*
 		setInterval(function() {
 			console.log("*** Send sendSocketNotification from setInterval function");
 
 			self.sendSocketNotification("MESSAGE", { "config": self.config });
 		}, this.config.interval);
-
+*/
 		// Schedule update timer.
 		//this.getData();
 		setInterval(function() {
@@ -137,7 +138,7 @@ Module.register("MMM-TankViewer", {
 			var labelDrainageTankValue = document.createElement("label");
 			labelDrainageTankValue.className = "value";
 			//labelDrainageTankValue.innerHTML = this.dataRequest.title + " m";
-			labelDrainageTankValue.innerHTML = this.dataRequest ? JSON.stringify(this.dataRequest) : "0";
+			//labelDrainageTankValue.innerHTML = this.dataRequest ? JSON.stringify(this.dataRequest) : "0";
 
 			wrapperDrainageTank.appendChild(labelDrainageTank);
 			wrapperDrainageTank.appendChild(labelDrainageTankValue);
