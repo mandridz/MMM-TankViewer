@@ -21,13 +21,13 @@ module.exports = NodeHelper.create({
 		if (notification === "MMM-TankViewer-NOTIFICATION_TEST") {
 			console.log("---> Working notification system. Notification:", notification, "payload: ", payload);
 			// Send notification
-			this.sendNotificationTest("---> Hello from node_helper");
+			this.sendNotificationTest("Hello from node_helper");
 		}
 	},
 
 	// Example function send notification test
 	sendNotificationTest: function(payload) {
-		this.sendSocketNotification("---> MMM-TankViewer-NOTIFICATION_TEST", payload);
+		this.sendSocketNotification("MMM-TankViewer-NOTIFICATION_TEST", payload);
 	},
 
 });
