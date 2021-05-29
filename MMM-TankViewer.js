@@ -24,10 +24,9 @@ Module.register("MMM-TankViewer", {
 		//Flag for check if module is loaded
 		this.loaded = false;
 
-		this.sendSocketNotification("MMM-TankViewer-WS_CONNECT", { "config": self.config });
+		self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", { "config": self.config });
 
 		// Schedule update timer.
-		this.getData();
 		setInterval(function() {
 			self.sendSocketNotification("MMM-TankViewer-WS_SEND_MESSAGE");
 			self.updateDom();
