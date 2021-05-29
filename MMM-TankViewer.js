@@ -10,7 +10,6 @@
 Module.register("MMM-TankViewer", {
 	defaults: {
 		updateInterval: 10000,
-		retryDelay: 5000,
 		reconnectInterval: 5000,
 		debug: true
 	},
