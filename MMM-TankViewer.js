@@ -29,6 +29,7 @@ Module.register("MMM-TankViewer", {
 		// Schedule update timer.
 		this.getData();
 		setInterval(function() {
+			this.getData();
 			self.updateDom();
 		}, this.config.updateInterval);
 	},
@@ -40,9 +41,9 @@ Module.register("MMM-TankViewer", {
 	 *
 	 */
 	getData: function() {
-		var self = this;
-
 		this.sendSocketNotification("MMM-TankViewer-WS_SEND_MESSAGE");
+/*
+		var self = this;
 
 		var urlApi = "https://jsonplaceholder.typicode.com/posts/1";
 		var retry = true;
@@ -68,6 +69,7 @@ Module.register("MMM-TankViewer", {
 			}
 		};
 		dataRequest.send();
+		*/
 	},
 
 
