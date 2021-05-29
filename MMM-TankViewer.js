@@ -106,7 +106,7 @@ Module.register("MMM-TankViewer", {
 
 			var labelCanalizationTankValue = document.createElement("label");
 			labelCanalizationTankValue.className = "value";
-			labelCanalizationTankValue.innerHTML = his.dataNotification[2].sonarValue + " m";
+			labelCanalizationTankValue.innerHTML = this.dataNotification[2].sonarValue + " m";
 
 			wrapperCanalizationTank.appendChild(labelCanalizationTank);
 			wrapperCanalizationTank.appendChild(labelCanalizationTankValue);
@@ -120,7 +120,7 @@ Module.register("MMM-TankViewer", {
 
 			var labelDrainageTankValue = document.createElement("label");
 			labelDrainageTankValue.className = "value";
-			labelDrainageTankValue.innerHTML = his.dataNotification[4].sonarValue + " m";
+			labelDrainageTankValue.innerHTML = this.dataNotification[4].sonarValue + " m";
 
 			wrapperDrainageTank.appendChild(labelDrainageTank);
 			wrapperDrainageTank.appendChild(labelDrainageTankValue);
