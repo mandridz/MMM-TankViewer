@@ -6,6 +6,7 @@
  * By yen
  * MIT Licensed.
  */
+require( 'console-stamp' )( console );
 
 Module.register("MMM-TankViewer", {
 	defaults: {
