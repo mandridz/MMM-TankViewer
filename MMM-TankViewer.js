@@ -145,7 +145,7 @@ Module.register("MMM-TankViewer", {
 		Log.info("***> socketNotificationReceived. Notification: " + notification + ", Payload: " + payload);
 
 
-		if(notification === "MMM-TankViewer-NOTIFICATION_TEST") {
+		if(notification === "MMM-TankViewer-WS_RESPONSE") {
 			// set dataNotification
 			this.dataNotification = payload;
 			this.updateDom();
