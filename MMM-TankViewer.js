@@ -23,10 +23,6 @@ Module.register("MMM-TankViewer", {
 		//Flag for check if module is loaded
 		this.loaded = false;
 
-		Log.info('info');
-		Log.log('log');
-		Log.error('error');
-
 		// Schedule update timer.
 		this.getData();
 		setInterval(function() {
@@ -141,6 +137,10 @@ Module.register("MMM-TankViewer", {
 
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
+
+		Log.info('***> info');
+		Log.log('***> log');
+		Log.error('***> error');
 
 		console.log("***> socketNotificationReceived. Notification: " + notification + ", Payload: " + payload);
 
