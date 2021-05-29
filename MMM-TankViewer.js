@@ -6,9 +6,10 @@
  * By yen
  * MIT Licensed.
  */
-require( 'console-stamp' )( console );
 
 Module.register("MMM-TankViewer", {
+	require( 'console-stamp' )( console );
+	
 	defaults: {
 		//updateInterval: 60000,
 		//retryDelay: 5000,
