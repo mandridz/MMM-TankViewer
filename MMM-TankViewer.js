@@ -7,9 +7,11 @@
  * MIT Licensed.
  */
 
-Module.register("MMM-TankViewer", {
-	require( 'console-stamp' )( console ),
+ require( 'console-stamp' )( console, {
+     format: '(->).yellow :date().blue.bgWhite.underline :label(7)'
+ } );
 
+Module.register("MMM-TankViewer", {
 	defaults: {
 		//updateInterval: 60000,
 		//retryDelay: 5000,
