@@ -6,12 +6,10 @@
  * By yen
  * MIT Licensed.
  */
+var MMM-TankViewer = require("MMM-TankViewer");
 
- require( 'console-stamp' )( console, {
-     format: '(->).yellow :date().blue.bgWhite.underline :label(7)'
- } );
-
-Module.register("MMM-TankViewer", {
+module.exports = MMM-TankViewer.create({
+//Module.register("MMM-TankViewer", {
 	defaults: {
 		//updateInterval: 60000,
 		//retryDelay: 5000,
