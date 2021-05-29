@@ -9,7 +9,7 @@
 
 Module.register("MMM-TankViewer", {
 	defaults: {
-		updateInterval: 60000,
+		updateInterval: 10000,
 		retryDelay: 5000,
 		reconnectInterval: 5000
 	},
@@ -29,7 +29,7 @@ Module.register("MMM-TankViewer", {
 		// Schedule update timer.
 		this.getData();
 		setInterval(function() {
-			getData();
+			this.sendSocketNotification("MMM-TankViewer-WS_SEND_MESSAGE");
 			self.updateDom();
 		}, this.config.updateInterval);
 	},
