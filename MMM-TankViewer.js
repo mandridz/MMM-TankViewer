@@ -10,7 +10,8 @@
 Module.register("MMM-TankViewer", {
 	defaults: {
 		updateInterval: 60000,
-		retryDelay: 5000
+		retryDelay: 5000,
+		reconnectInterval: 5000
 	},
 
 	requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -22,6 +23,8 @@ Module.register("MMM-TankViewer", {
 
 		//Flag for check if module is loaded
 		this.loaded = false;
+
+		this.sendSocketNotification("MMM-TankViewer-WS_CONNECT", { "config": self.config });
 
 		// Schedule update timer.
 		this.getData();
@@ -38,6 +41,8 @@ Module.register("MMM-TankViewer", {
 	 */
 	getData: function() {
 		var self = this;
+
+		this.sendSocketNotification("MMM-TankViewer-WS_SEND_MESSAGE");
 
 		var urlApi = "https://jsonplaceholder.typicode.com/posts/1";
 		var retry = true;
