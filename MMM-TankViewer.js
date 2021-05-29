@@ -9,15 +9,8 @@
 
 Module.register("MMM-TankViewer", {
 	defaults: {
-		//updateInterval: 60000,
-		//retryDelay: 5000,
-
-		host: '10.0.3.3',
-		port: 8080,
-		path: '',
-		interval: 10000,
-		message: '',
-		debug: false
+		updateInterval: 60000,
+		retryDelay: 5000
 	},
 
 	requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -30,23 +23,15 @@ Module.register("MMM-TankViewer", {
 		//Flag for check if module is loaded
 		this.loaded = false;
 
-		console.log("*** Sending Socket Notification to node_helper");
-
-		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
-
-		//this.updateDom();
-
-		setInterval(function() {
-			console.log("*** Send sendSocketNotification from setInterval function");
-
-			self.sendSocketNotification("MESSAGE", { "config": self.config });
-		}, this.config.interval);
+		Log.info('info');
+		Log.log('log');
+		Log.error('error');
 
 		// Schedule update timer.
-		//this.getData();
+		this.getData();
 		setInterval(function() {
 			self.updateDom();
-		}, this.config.interval);
+		}, this.config.updateInterval);
 	},
 
 	/*
@@ -55,7 +40,6 @@ Module.register("MMM-TankViewer", {
 	 * get a URL request
 	 *
 	 */
-
 	getData: function() {
 		var self = this;
 
@@ -65,17 +49,17 @@ Module.register("MMM-TankViewer", {
 		var dataRequest = new XMLHttpRequest();
 		dataRequest.open("GET", urlApi, true);
 		dataRequest.onreadystatechange = function() {
-			console.log(this.readyState);
+			console.log("***> readyState: " + this.readyState);
 			if (this.readyState === 4) {
-				console.log(this.status);
+				console.log("***> status: " + this.status);
 				if (this.status === 200) {
 					self.processData(JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
-					Log.error(self.name, this.status);
+					Log.error("***> ERROR: " + self.name, this.status);
 					retry = false;
 				} else {
-					Log.error(self.name, "Could not load data.");
+					Log.error("***> " + self.name, "Could not load data.");
 				}
 				if (retry) {
 					self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
@@ -86,66 +70,51 @@ Module.register("MMM-TankViewer", {
 	},
 
 
-
 	/* scheduleUpdate()
 	 * Schedule next update.
 	 *
 	 * argument delay number - Milliseconds before next update.
 	 *  If empty, this.config.updateInterval is used.
 	 */
-
 	scheduleUpdate: function(delay) {
-		var nextLoad = this.config.interval;
+		var nextLoad = this.config.updateInterval;
 		if (typeof delay !== "undefined" && delay >= 0) {
 			nextLoad = delay;
 		}
-		nextLoad = nextLoad;
+		nextLoad = nextLoad ;
 		var self = this;
 		setTimeout(function() {
 			self.getData();
 		}, nextLoad);
 	},
 
-
 	getDom: function() {
 		var self = this;
 
+		// create element wrapper for show into the module
 		var wrapper = document.createElement("div");
-
+		// If this.dataRequest is not empty
 		if (this.dataRequest) {
-			// CanalizationTank
-			var wrapperCanalizationTank = document.createElement("div");
+			var wrapperDataRequest = document.createElement("div");
+			// check format https://jsonplaceholder.typicode.com/posts/1
+			wrapperDataRequest.innerHTML = this.dataRequest.title;
 
-			var labelCanalizationTank = document.createElement("label");
-			labelCanalizationTank.className = "label";
-			labelCanalizationTank.innerHTML = "Канализационный коллектор: ";
+			var labelDataRequest = document.createElement("label");
+			labelDataRequest.innerHTML = "TITLE";
 
-			var labelCanalizationTankValue = document.createElement("label");
-			labelCanalizationTankValue.className = "value";
-			labelCanalizationTankValue.innerHTML = "2.06 m";
 
-			wrapperCanalizationTank.appendChild(labelCanalizationTank);
-			wrapperCanalizationTank.appendChild(labelCanalizationTankValue);
-
-			// DrainageTank
-			var wrapperDrainageTank = document.createElement("div");
-
-			var labelDrainageTank = document.createElement("label");
-			labelDrainageTank.className = "label";
-			labelDrainageTank.innerHTML = "Дренажный коллектор: ";
-
-			var labelDrainageTankValue = document.createElement("label");
-			labelDrainageTankValue.className = "value";
-			//labelDrainageTankValue.innerHTML = this.dataRequest.title + " m";
-			labelDrainageTankValue.innerHTML = this.dataRequest ? JSON.stringify(this.dataRequest) : "0";
-
-			wrapperDrainageTank.appendChild(labelDrainageTank);
-			wrapperDrainageTank.appendChild(labelDrainageTankValue);
-
-			wrapper.appendChild(wrapperCanalizationTank);
-			wrapper.appendChild(wrapperDrainageTank);
+			wrapper.appendChild(labelDataRequest);
+			wrapper.appendChild(wrapperDataRequest);
 		}
 
+		// Data from helper
+		if (this.dataNotification) {
+			var wrapperDataNotification = document.createElement("div");
+			// datanotification
+			wrapperDataNotification.innerHTML =  "UPDATE" + ": " + this.dataNotification.date;
+
+			wrapper.appendChild(wrapperDataNotification);
+		}
 		return wrapper;
 	},
 
@@ -171,14 +140,11 @@ Module.register("MMM-TankViewer", {
 	},
 
 	// socketNotificationReceived from helper
-	socketNotificationReceived: function(notification, payload) {
+	socketNotificationReceived: function (notification, payload) {
 
-		console.log("****** socketNotificationReceived in Main Module ****** ---> " + payload);
+		console.log("***> socketNotificationReceived. Notification: " + notification + ", Payload: " + payload);
 
-		if (notification === "MMM-TankViewer-REQUEST_VALUE") {
-
-			console.log("---> Receved notification MMM-TankViewer-REQUEST_VALUE: " + payload);
-
+		if(notification === "MMM-TankViewer-NOTIFICATION_TEST") {
 			// set dataNotification
 			this.dataNotification = payload;
 			this.updateDom();
