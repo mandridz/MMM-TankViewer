@@ -6,9 +6,9 @@
  * By yen
  * MIT Licensed.
  */
-var MMM-TankViewer = require("MMM-TankViewer");
+var TankViewer = require("MMM-TankViewer");
 
-module.exports = MMM-TankViewer.create({
+module.exports = TankViewer.create({
 //Module.register("MMM-TankViewer", {
 	defaults: {
 		//updateInterval: 60000,
