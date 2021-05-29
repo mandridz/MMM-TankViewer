@@ -55,7 +55,7 @@ Module.register("MMM-TankViewer", {
 	 * get a URL request
 	 *
 	 */
-	 /*
+
 	getData: function() {
 		var self = this;
 
@@ -84,7 +84,7 @@ Module.register("MMM-TankViewer", {
 		};
 		dataRequest.send();
 	},
-	*/
+
 
 
 	/* scheduleUpdate()
@@ -93,7 +93,7 @@ Module.register("MMM-TankViewer", {
 	 * argument delay number - Milliseconds before next update.
 	 *  If empty, this.config.updateInterval is used.
 	 */
-	 /*
+
 	scheduleUpdate: function(delay) {
 		var nextLoad = this.config.interval;
 		if (typeof delay !== "undefined" && delay >= 0) {
@@ -105,7 +105,7 @@ Module.register("MMM-TankViewer", {
 			self.getData();
 		}, nextLoad);
 	},
-	*/
+
 
 	getDom: function() {
 		var self = this;
@@ -167,7 +167,7 @@ Module.register("MMM-TankViewer", {
 
 		// the data if load
 		// send notification to helper
-		//this.sendSocketNotification("MMM-TankViewer-NOTIFICATION_TEST", data);
+		this.sendSocketNotification("MMM-TankViewer-NOTIFICATION_TEST", data);
 	},
 
 	// socketNotificationReceived from helper
