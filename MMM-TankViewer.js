@@ -11,7 +11,7 @@ Module.register("MMM-TankViewer", {
 	defaults: {
 		updateInterval: 10000,
 		reconnectInterval: 5000,
-		debug: true
+		debug: false
 	},
 
 	requiresVersion: "2.1.0", // Required version of MagicMirror
