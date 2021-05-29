@@ -23,9 +23,9 @@ Module.register("MMM-TankViewer", {
 		//Flag for check if module is loaded
 		this.loaded = false;
 
-		Log.info('info');  # To log to stdout
-		Log.log('log');     # To log to stdout
-		Log.error('error');  # To log to stderr
+		Log.info('info');
+		Log.log('log');
+	Log.error('error');
 
 		// Schedule update timer.
 		this.getData();
