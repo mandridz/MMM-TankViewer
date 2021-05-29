@@ -5,6 +5,8 @@
  * MIT Licensed.
  */
 
+require( 'console-stamp' )( console );
+
 var NodeHelper = require("node_helper");
 const WebSocket = require("ws");
 
