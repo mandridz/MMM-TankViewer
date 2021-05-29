@@ -11,7 +11,8 @@ Module.register("MMM-TankViewer", {
 	defaults: {
 		updateInterval: 10000,
 		retryDelay: 5000,
-		reconnectInterval: 5000
+		reconnectInterval: 5000,
+		debug: true
 	},
 
 	requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -93,31 +94,41 @@ Module.register("MMM-TankViewer", {
 	getDom: function() {
 		var self = this;
 
-		// create element wrapper for show into the module
 		var wrapper = document.createElement("div");
-		// If this.dataRequest is not empty
-		if (this.dataRequest) {
-			var wrapperDataRequest = document.createElement("div");
-			// check format https://jsonplaceholder.typicode.com/posts/1
-			wrapperDataRequest.innerHTML = this.dataRequest.title;
 
-			var labelDataRequest = document.createElement("label");
-			labelDataRequest.innerHTML = "TITLE";
-
-
-			wrapper.appendChild(labelDataRequest);
-			wrapper.appendChild(wrapperDataRequest);
-		}
-
-		// Data from helper
 		if (this.dataNotification) {
-			var wrapperDataNotification = document.createElement("div");
-			// datanotification
-			//wrapperDataNotification.innerHTML =  "UPDATE" + ": " + this.dataNotification.date;
-			wrapperDataNotification.innerHTML =  "dataNotification[2].sonarValue" + ": " + this.dataNotification[2].sonarValue;
+			// CanalizationTank
+			var wrapperCanalizationTank = document.createElement("div");
 
-			wrapper.appendChild(wrapperDataNotification);
+			var labelCanalizationTank = document.createElement("label");
+			labelCanalizationTank.className = "label";
+			labelCanalizationTank.innerHTML = "Канализационный коллектор: ";
+
+			var labelCanalizationTankValue = document.createElement("label");
+			labelCanalizationTankValue.className = "value";
+			labelCanalizationTankValue.innerHTML = his.dataNotification[2].sonarValue + " m";
+
+			wrapperCanalizationTank.appendChild(labelCanalizationTank);
+			wrapperCanalizationTank.appendChild(labelCanalizationTankValue);
+
+			// DrainageTank
+			var wrapperDrainageTank = document.createElement("div");
+
+			var labelDrainageTank = document.createElement("label");
+			labelDrainageTank.className = "label";
+			labelDrainageTank.innerHTML = "Дренажный коллектор: ";
+
+			var labelDrainageTankValue = document.createElement("label");
+			labelDrainageTankValue.className = "value";
+			labelDrainageTankValue.innerHTML = his.dataNotification[4].sonarValue + " m";
+
+			wrapperDrainageTank.appendChild(labelDrainageTank);
+			wrapperDrainageTank.appendChild(labelDrainageTankValue);
+
+			wrapper.appendChild(wrapperCanalizationTank);
+			wrapper.appendChild(wrapperDrainageTank);
 		}
+
 		return wrapper;
 	},
 
