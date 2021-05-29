@@ -44,9 +44,9 @@ Module.register("MMM-TankViewer", {
 
 		// Schedule update timer.
 		//this.getData();
-		//setInterval(function() {
-			//self.updateDom();
-		//}, this.config.interval);
+		setInterval(function() {
+			self.updateDom();
+		}, this.config.interval);
 	},
 
 	/*
