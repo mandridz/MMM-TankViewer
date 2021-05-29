@@ -21,6 +21,10 @@ module.exports = NodeHelper.create({
 	socketNotificationReceived: function(notification, payload) {
 		var self = this;
 
+		Log.info('NodeHelper info');
+		Log.log('NodeHelper log');
+		Log.error('NodeHelper error');
+
 		console.log("---> Working notification system. Notification: ", notification, "payload: ", payload);
 
 		if (notification === "WS_CONNECT") {
