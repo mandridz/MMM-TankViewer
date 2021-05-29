@@ -29,7 +29,7 @@ Module.register("MMM-TankViewer", {
 		// Schedule update timer.
 		this.getData();
 		setInterval(function() {
-			this.sendSocketNotification("MMM-TankViewer-WS_SEND_MESSAGE");
+			self.sendSocketNotification("MMM-TankViewer-WS_SEND_MESSAGE");
 			self.updateDom();
 		}, this.config.updateInterval);
 	},
