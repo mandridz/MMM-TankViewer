@@ -112,7 +112,8 @@ Module.register("MMM-TankViewer", {
 		if (this.dataNotification) {
 			var wrapperDataNotification = document.createElement("div");
 			// datanotification
-			wrapperDataNotification.innerHTML =  "UPDATE" + ": " + this.dataNotification.date;
+			//wrapperDataNotification.innerHTML =  "UPDATE" + ": " + this.dataNotification.date;
+			wrapperDataNotification.innerHTML =  "dataNotification[2].sonarValue" + ": " + this.dataNotification[2].sonarValue;
 
 			wrapper.appendChild(wrapperDataNotification);
 		}
@@ -142,7 +143,7 @@ Module.register("MMM-TankViewer", {
 
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
-		Log.info("***> socketNotificationReceived. Notification: " + notification + ", Payload: " + payload);
+		Log.info("***> socketNotificationReceived. Notification: " + notification + ", Payload: " + JSON.stringify(payload));
 
 
 		if(notification === "MMM-TankViewer-WS_RESPONSE") {
