@@ -32,9 +32,9 @@ Module.register("MMM-TankViewer", {
 
 		console.log("*** Sending Socket Notification to node_helper");
 
-		Log.info('info');
-		Log.log('log');
-		Log.error('error');
+		console.info('*** info');
+		console.log('*** log');
+		console.error('*** error');
 
 		self.sendSocketNotification("WS_CONNECT", { "config": self.config });
 
