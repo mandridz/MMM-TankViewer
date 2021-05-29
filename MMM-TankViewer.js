@@ -137,7 +137,7 @@ Module.register("MMM-TankViewer", {
 
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
-		console.log("***> socketNotificationReceived. Notification: " + notification + ", Payload: " + payload);
+		Log.info("***> socketNotificationReceived. Notification: " + notification + ", Payload: " + payload);
 
 
 		if(notification === "MMM-TankViewer-NOTIFICATION_TEST") {
