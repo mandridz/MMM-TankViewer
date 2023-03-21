@@ -4,5 +4,8 @@
   "description": "Show info about deep in canalization and drainage collectors",
   "main": "MMM-TankViewer.js",
   "author": "yen",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.13.0"
+  }
 }
