@@ -37,12 +37,12 @@ Module.register("MMM-TankViewer", {
     var wrapper = document.createElement("div");
 
     if (this.dataNotification) {
-      var top = document.createElement("div");
-      top.classList.add("top");
-      top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
-        "ru-RU"
-      )} / ${date.toLocaleDateString("ru-RU")}`;
-      wrapper.appendChild(top);
+      //var top = document.createElement("div");
+      //top.classList.add("top");
+      //top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
+      //  "ru-RU"
+      //)} / ${date.toLocaleDateString("ru-RU")}`;
+      //wrapper.appendChild(top);
 
       // CanalizationTank
       var wrapperCanalizationTank = document.createElement("div");
