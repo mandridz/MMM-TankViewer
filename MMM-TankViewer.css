@@ -17,3 +17,9 @@
   font-size: 18pt;
   color: #087e82;
 }
+
+.tab {
+  table-layout: fixed;
+  width: 500px !important;
+  margin-top: 16px;
+}
