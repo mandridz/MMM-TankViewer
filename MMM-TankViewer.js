@@ -64,8 +64,9 @@ Module.register("MMM-TankViewer", {
       labelDrainageTankValue.innerHTML =
         this.dataNotification[4].sonarValue + " m";
 
+      // Pump Status
       var tabStatus = document.createElement("table");
-      //tabStatus.className = "tab";
+      tabStatus.className = "tab";
 
       var trHeader = document.createElement("tr");
 
@@ -112,7 +113,7 @@ Module.register("MMM-TankViewer", {
       trStatus.appendChild(tdStatus5);
 
       tabStatus.appendChild(trHeader);
-      tabStatus.appendChild(trStatus);
+      //tabStatus.appendChild(trStatus);
 
       wrapperDrainageTank.appendChild(labelDrainageTank);
       wrapperDrainageTank.appendChild(labelDrainageTankValue);
