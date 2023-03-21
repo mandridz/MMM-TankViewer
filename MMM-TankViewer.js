@@ -37,6 +37,13 @@ Module.register("MMM-TankViewer", {
     var wrapper = document.createElement("div");
 
     if (this.dataNotification) {
+      var top = document.createElement("div");
+      top.classList.add("top");
+      top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
+        "ru-RU"
+      )} / ${date.toLocaleDateString("ru-RU")}`;
+      wrapper.appendChild(top);
+
       // CanalizationTank
       var wrapperCanalizationTank = document.createElement("div");
 
@@ -70,22 +77,30 @@ Module.register("MMM-TankViewer", {
 
       var trHeader = document.createElement("tr");
       var tdName = document.createElement("td");
+      tdName.className = "header";
       tdName.innerHTML = "Насос";
       var tdName1 = document.createElement("td");
+      tdName1.className = "header";
       tdName1.innerHTML = "1";
       var tdName2 = document.createElement("td");
+      tdName2.className = "header";
       tdName2.innerHTML = "2";
       var tdName3 = document.createElement("td");
+      tdName3.className = "header";
       tdName3.innerHTML = "3";
       var tdName4 = document.createElement("td");
+      tdName4.className = "header";
       tdName4.innerHTML = "4";
       var tdName5 = document.createElement("td");
+      tdName5.className = "header";
       tdName5.innerHTML = "5";
 
       var trStatus = document.createElement("tr");
       var tdStatus = document.createElement("td");
+      tdStatus.className = "status";
       tdStatus.innerHTML = "Статус";
       var tdStatus1 = document.createElement("td");
+      tdStatus1.className = "status";
       var imgPower1 = document.createElement("img");
       imgPower1.src =
         this.dataNotification[0].tankStatus === "ON"
@@ -93,6 +108,7 @@ Module.register("MMM-TankViewer", {
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus1.appendChild(imgPower1);
       var tdStatus2 = document.createElement("td");
+      tdStatus2.className = "status";
       var imgPower2 = document.createElement("img");
       imgPower2.src =
         this.dataNotification[1].tankStatus === "ON"
@@ -100,6 +116,7 @@ Module.register("MMM-TankViewer", {
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus2.appendChild(imgPower2);
       var tdStatus3 = document.createElement("td");
+      tdStatus3.className = "status";
       var imgPower3 = document.createElement("img");
       imgPower3.src =
         this.dataNotification[2].tankStatus === "ON"
@@ -107,6 +124,7 @@ Module.register("MMM-TankViewer", {
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus3.appendChild(imgPower3);
       var tdStatus4 = document.createElement("td");
+      tdStatus4.className = "status";
       var imgPower4 = document.createElement("img");
       imgPower4.src =
         this.dataNotification[3].tankStatus === "ON"
@@ -114,6 +132,7 @@ Module.register("MMM-TankViewer", {
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus4.appendChild(imgPower4);
       var tdStatus5 = document.createElement("td");
+      tdStatus5.className = "status";
       var imgPower5 = document.createElement("img");
       imgPower5.src =
         this.dataNotification[4].tankStatus === "ON"
@@ -123,17 +142,23 @@ Module.register("MMM-TankViewer", {
 
       var trCurrent = document.createElement("tr");
       var tdCurrent = document.createElement("td");
-      tdCurrent.innerHTML = "Ток, А";
+      tdCurrent.className = "curr";
+      tdCurrent.innerHTML = "Ток";
       var tdCurrent1 = document.createElement("td");
-      tdCurrent1.innerHTML = this.dataNotification[0].currentValue;
+      tdCurrent1.className = "curr";
+      tdCurrent1.innerHTML = `${this.dataNotification[0].currentValue}, A`;
       var tdCurrent2 = document.createElement("td");
-      tdCurrent2.innerHTML = this.dataNotification[1].currentValue;
+      tdCurrent2.className = "curr";
+      tdCurrent2.innerHTML = `${this.dataNotification[1].currentValue}, A`;
       var tdCurrent3 = document.createElement("td");
-      tdCurrent3.innerHTML = this.dataNotification[2].currentValue;
+      tdCurrent3.className = "curr";
+      tdCurrent3.innerHTML = `${this.dataNotification[2].currentValue}, A`;
       var tdCurrent4 = document.createElement("td");
-      tdCurrent4.innerHTML = this.dataNotification[3].currentValue;
+      tdCurrent4.className = "curr";
+      tdCurrent4.innerHTML = `${this.dataNotification[3].currentValue}, A`;
       var tdCurrent5 = document.createElement("td");
-      tdCurrent5.innerHTML = this.dataNotification[4].currentValue;
+      tdCurrent5.className = "curr";
+      tdCurrent5.innerHTML = `${this.dataNotification[4].currentValue}, A`;
 
       trHeader.appendChild(tdName);
       trHeader.appendChild(tdName1);
