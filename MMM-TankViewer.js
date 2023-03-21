@@ -113,7 +113,7 @@ Module.register("MMM-TankViewer", {
       trStatus.appendChild(tdStatus5);
 
       tabStatus.appendChild(trHeader);
-      //tabStatus.appendChild(trStatus);
+      tabStatus.appendChild(trStatus);
 
       wrapperDrainageTank.appendChild(labelDrainageTank);
       wrapperDrainageTank.appendChild(labelDrainageTankValue);
