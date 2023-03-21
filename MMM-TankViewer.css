@@ -18,12 +18,24 @@
   margin-top: 16px;
 }
 
+.header-left {
+  text-align: left;
+}
+
 .header {
   text-align: center;
 }
 
+.status-left {
+  text-align: left;
+}
+
 .status {
   text-align: center;
+}
+
+.curr-left {
+  text-align: left;
 }
 
 .curr {

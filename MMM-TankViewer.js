@@ -34,15 +34,18 @@ Module.register("MMM-TankViewer", {
   getDom: function () {
     var self = this;
 
+    const date = new Date();
+
     var wrapper = document.createElement("div");
 
     if (this.dataNotification) {
-      //var top = document.createElement("div");
-      //top.classList.add("top");
-      //top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
-      //  "ru-RU"
-      //)} / ${date.toLocaleDateString("ru-RU")}`;
-      //wrapper.appendChild(top);
+      var top = document.createElement("div");
+      top.classList.add("top");
+      top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
+        "ru-RU"
+      )} / ${date.toLocaleDateString("ru-RU")}`;
+
+      wrapper.appendChild(top);
 
       // CanalizationTank
       var wrapperCanalizationTank = document.createElement("div");
@@ -77,8 +80,8 @@ Module.register("MMM-TankViewer", {
 
       var trHeader = document.createElement("tr");
       var tdName = document.createElement("td");
-      tdName.className = "header";
-      tdName.innerHTML = "Насос";
+      tdName.className = "header-left";
+      tdName.innerHTML = "Насос:";
       var tdName1 = document.createElement("td");
       tdName1.className = "header";
       tdName1.innerHTML = "1";
@@ -97,8 +100,8 @@ Module.register("MMM-TankViewer", {
 
       var trStatus = document.createElement("tr");
       var tdStatus = document.createElement("td");
-      tdStatus.className = "status";
-      tdStatus.innerHTML = "Статус";
+      tdStatus.className = "status-left";
+      tdStatus.innerHTML = "Статус:";
       var tdStatus1 = document.createElement("td");
       tdStatus1.className = "status";
       var imgPower1 = document.createElement("img");
@@ -142,8 +145,8 @@ Module.register("MMM-TankViewer", {
 
       var trCurrent = document.createElement("tr");
       var tdCurrent = document.createElement("td");
-      tdCurrent.className = "curr";
-      tdCurrent.innerHTML = "Ток";
+      tdCurrent.className = "curr-left";
+      tdCurrent.innerHTML = "Ток:";
       var tdCurrent1 = document.createElement("td");
       tdCurrent1.className = "curr";
       tdCurrent1.innerHTML = `${this.dataNotification[0].currentValue}, A`;
