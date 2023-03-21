@@ -65,7 +65,7 @@ Module.register("MMM-TankViewer", {
         this.dataNotification[4].sonarValue + " m";
 
       var tabStatus = document.createElement("table");
-      tabStatus.className = "tab";
+      //tabStatus.className = "tab";
 
       var trHeader = document.createElement("tr");
 
