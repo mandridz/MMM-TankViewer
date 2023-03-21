@@ -69,7 +69,6 @@ Module.register("MMM-TankViewer", {
       tabStatus.className = "tab";
 
       var trHeader = document.createElement("tr");
-
       var tdName = document.createElement("td");
       tdName.innerHTML = "Насос";
       var tdName1 = document.createElement("td");
@@ -84,7 +83,6 @@ Module.register("MMM-TankViewer", {
       tdName5.innerHTML = "5";
 
       var trStatus = document.createElement("tr");
-
       var tdStatus = document.createElement("td");
       tdStatus.innerHTML = "Статус";
       var tdStatus1 = document.createElement("td");
@@ -97,6 +95,20 @@ Module.register("MMM-TankViewer", {
       tdStatus4.innerHTML = this.dataNotification[3].tankStatus;
       var tdStatus5 = document.createElement("td");
       tdStatus5.innerHTML = this.dataNotification[4].tankStatus;
+
+      var trCurrent = document.createElement("tr");
+      var tdCurrent = document.createElement("td");
+      tdCurrent.innerHTML = "Ток, А";
+      var tdCurrent1 = document.createElement("td");
+      tdCurrent1.innerHTML = this.dataNotification[0].currentValue;
+      var tdCurrent2 = document.createElement("td");
+      tdCurrent2.innerHTML = this.dataNotification[1].currentValue;
+      var tdCurrent3 = document.createElement("td");
+      tdCurrent3.innerHTML = this.dataNotification[2].currentValue;
+      var tdCurrent4 = document.createElement("td");
+      tdCurrent4.innerHTML = this.dataNotification[3].currentValue;
+      var tdCurrent5 = document.createElement("td");
+      tdCurrent5.innerHTML = this.dataNotification[4].currentValue;
 
       trHeader.appendChild(tdName);
       trHeader.appendChild(tdName1);
@@ -112,8 +124,16 @@ Module.register("MMM-TankViewer", {
       trStatus.appendChild(tdStatus4);
       trStatus.appendChild(tdStatus5);
 
+      trCurrent.appendChild(tdCurrent);
+      trCurrent.appendChild(tdCurrent1);
+      trCurrent.appendChild(tdCurrent2);
+      trCurrent.appendChild(tdCurrent3);
+      trCurrent.appendChild(tdCurrent4);
+      trCurrent.appendChild(tdCurrent5);
+
       tabStatus.appendChild(trHeader);
       tabStatus.appendChild(trStatus);
+      tabStatus.appendChild(trCurrent);
 
       wrapperDrainageTank.appendChild(labelDrainageTank);
       wrapperDrainageTank.appendChild(labelDrainageTankValue);
