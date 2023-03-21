@@ -83,6 +83,7 @@ Module.register("MMM-TankViewer", {
       var tdName5 = document.createElement("td");
       tdName5.innerHTML = "5";
 
+      /*
       var trStatus = document.createElement("tr");
 
       var tdStatus = document.createElement("td");
@@ -97,6 +98,7 @@ Module.register("MMM-TankViewer", {
       tdName4.innerHTML = this.dataNotification[3].tankStatus;
       var tdStatus5 = document.createElement("td");
       tdName5.innerHTML = this.dataNotification[4].tankStatus;
+       */
 
       trHeader.appendChild(tdName);
       trHeader.appendChild(tdName1);
@@ -105,12 +107,14 @@ Module.register("MMM-TankViewer", {
       trHeader.appendChild(tdName4);
       trHeader.appendChild(tdName5);
 
+      /*
       trStatus.appendChild(tdStatus);
       trStatus.appendChild(tdStatus1);
       trStatus.appendChild(tdStatus2);
       trStatus.appendChild(tdStatus3);
       trStatus.appendChild(tdStatus4);
       trStatus.appendChild(tdStatus5);
+       */
 
       tabStatus.appendChild(trHeader);
       //tabStatus.appendChild(trStatus);
