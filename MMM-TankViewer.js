@@ -29,7 +29,6 @@ Module.register("MMM-TankViewer", {
     var wrapper = document.createElement("div");
 
     if (this.dataNotification) {
-      // TODO: ???
       var data = this.dataNotification;
 
       var top = document.createElement("div");
@@ -96,42 +95,37 @@ Module.register("MMM-TankViewer", {
       var tdStatus1 = document.createElement("td");
       tdStatus1.className = "status";
       var imgPower1 = document.createElement("img");
-      imgPower1.src =
-        data[0].status === "ON"
-          ? "modules/MMM-TankViewer/img/power-on.png"
-          : "modules/MMM-TankViewer/img/power-off.png";
+      imgPower1.src = data[0].status
+        ? "modules/MMM-TankViewer/img/power-on.png"
+        : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus1.appendChild(imgPower1);
       var tdStatus2 = document.createElement("td");
       tdStatus2.className = "status";
       var imgPower2 = document.createElement("img");
-      imgPower2.src =
-        data[1].status === "ON"
-          ? "modules/MMM-TankViewer/img/power-on.png"
-          : "modules/MMM-TankViewer/img/power-off.png";
+      imgPower2.src = data[1].status
+        ? "modules/MMM-TankViewer/img/power-on.png"
+        : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus2.appendChild(imgPower2);
       var tdStatus3 = document.createElement("td");
       tdStatus3.className = "status";
       var imgPower3 = document.createElement("img");
-      imgPower3.src =
-        data[2].status === "ON"
-          ? "modules/MMM-TankViewer/img/power-on.png"
-          : "modules/MMM-TankViewer/img/power-off.png";
+      imgPower3.src = data[2].status
+        ? "modules/MMM-TankViewer/img/power-on.png"
+        : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus3.appendChild(imgPower3);
       var tdStatus4 = document.createElement("td");
       tdStatus4.className = "status";
       var imgPower4 = document.createElement("img");
-      imgPower4.src =
-        data[3].status === "ON"
-          ? "modules/MMM-TankViewer/img/power-on.png"
-          : "modules/MMM-TankViewer/img/power-off.png";
+      imgPower4.src = data[3].status
+        ? "modules/MMM-TankViewer/img/power-on.png"
+        : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus4.appendChild(imgPower4);
       var tdStatus5 = document.createElement("td");
       tdStatus5.className = "status";
       var imgPower5 = document.createElement("img");
-      imgPower5.src =
-        data[4].status === "ON"
-          ? "modules/MMM-TankViewer/img/power-on.png"
-          : "modules/MMM-TankViewer/img/power-off.png";
+      imgPower5.src = data[4].status
+        ? "modules/MMM-TankViewer/img/power-on.png"
+        : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus5.appendChild(imgPower5);
 
       var trCurrent = document.createElement("tr");
