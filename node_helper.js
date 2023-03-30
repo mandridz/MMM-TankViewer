@@ -28,30 +28,30 @@ module.exports = NodeHelper.create({
     self.disconnect();
 
     const url = "ws://" + config.host + ":" + config.port + config.path;
-    self.ws = new ReconnectingWebSocket(url, null, {
+    self.rws = new ReconnectingWebSocket(url, [], {
       debug: true,
       reconnectInterval: 3000,
     });
 
     // Register error listener
-    self.ws.onerror = function (event) {
+    self.rws.onerror = function (event) {
       if (callback) {
         callback(event.code);
       }
     };
 
     // Register open listener
-    self.ws.onopen = function open() {
+    self.rws.onopen = function open() {
       self.debug("Connection established:", url);
 
       // Register on close listener
-      self.ws.onclose = function close(event) {
+      self.rws.onclose = function close(event) {
         self.error("Connection was closed!", event.code, event.reason);
         self.reconnect(config);
       };
 
       // Register message handler
-      self.ws.onmessage = function message(event) {
+      self.rws.onmessage = function message(event) {
         try {
           self.sendMessage(JSON.parse(event.data));
         } catch (error) {
@@ -92,18 +92,18 @@ module.exports = NodeHelper.create({
 
   disconnect: function () {
     var self = this;
-    if (self.ws) {
+    if (self.rws) {
       // Unregister listener
-      self.ws.onclose = undefined;
-      self.ws.onerror = undefined;
-      self.ws.onopen = undefined;
-      self.ws.onmessage = undefined;
+      self.rws.onclose = undefined;
+      self.rws.onerror = undefined;
+      self.rws.onopen = undefined;
+      self.rws.onmessage = undefined;
 
-      if (self.ws.readyState === WebSocket.OPEN) {
-        self.ws.close();
-        self.ws.terminate();
+      if (self.rws.readyState === WebSocket.OPEN) {
+        self.rws.close();
+        self.rws.terminate();
       }
-      self.ws = undefined;
+      self.rws = undefined;
     }
   },
 
