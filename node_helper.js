@@ -31,7 +31,6 @@ module.exports = NodeHelper.create({
     self.rws = new ReconnectingWebSocket(url, [], {
       debug: true,
       WebSocket: ws,
-      startClosed: true,
     });
 
     // Register error listener
