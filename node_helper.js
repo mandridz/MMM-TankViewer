@@ -68,7 +68,8 @@ module.exports = NodeHelper.create({
 
     self.sendSocketNotification(
       "MMM-TankViewer-WS_RESPONSE",
-      JSON.stringify(event)
+      //JSON.stringify(event)
+      event
     );
   },
 
