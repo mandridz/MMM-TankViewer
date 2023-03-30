@@ -65,7 +65,7 @@ module.exports = NodeHelper.create({
   sendMessage: function (event) {
     var self = this;
     self.debug("Send event: ", event);
-    self.debug("Send event JSON: ", JSON.parse(event));
+    self.debug("Send event JSON: ", JSON.stringify(event, null, 2));
     self.sendSocketNotification(
       "MMM-TankViewer-WS_RESPONSE",
       JSON.parse(event)
