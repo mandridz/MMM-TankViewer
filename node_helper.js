@@ -28,9 +28,7 @@ module.exports = NodeHelper.create({
     self.disconnect();
 
     const url = "ws://" + config.host + ":" + config.port + config.path;
-    self.rws = new ReconnectingWebSocket(url, [], {
-      debug: true,
-    });
+    self.rws = new ReconnectingWebSocket(url);
 
     // Register error listener
     self.rws.onerror = function (event) {
