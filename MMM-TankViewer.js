@@ -9,8 +9,6 @@
 
 Module.register("MMM-TankViewer", {
   defaults: {
-    updateInterval: 10000,
-    reconnectInterval: 5000,
     debug: false,
   },
 
@@ -18,27 +16,21 @@ Module.register("MMM-TankViewer", {
 
   start: function () {
     var self = this;
-    var dataNotification = null;
+    var dataNotification = undefined;
 
     self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", {
       config: self.config,
     });
-
-    // Schedule update timer.
-    setInterval(function () {
-      self.sendSocketNotification("MMM-TankViewer-WS_SEND_MESSAGE");
-      self.updateDom();
-    }, this.config.updateInterval);
   },
 
   getDom: function () {
-    var self = this;
-
     const date = new Date();
 
     var wrapper = document.createElement("div");
 
     if (this.dataNotification) {
+      var data = JSON.parse(this.dataNotification);
+
       var top = document.createElement("div");
       top.classList.add("top");
       top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
@@ -56,8 +48,7 @@ Module.register("MMM-TankViewer", {
 
       var labelCanalizationTankValue = document.createElement("label");
       labelCanalizationTankValue.className = "value";
-      labelCanalizationTankValue.innerHTML =
-        this.dataNotification[2].sonarValue + " m";
+      labelCanalizationTankValue.innerHTML = data[2].sonar + " m";
 
       wrapperCanalizationTank.appendChild(labelCanalizationTank);
       wrapperCanalizationTank.appendChild(labelCanalizationTankValue);
@@ -71,8 +62,7 @@ Module.register("MMM-TankViewer", {
 
       var labelDrainageTankValue = document.createElement("label");
       labelDrainageTankValue.className = "value";
-      labelDrainageTankValue.innerHTML =
-        this.dataNotification[4].sonarValue + " m";
+      labelDrainageTankValue.innerHTML = data[4].sonar + " m";
 
       // Pump Status
       var tabStatus = document.createElement("table");
@@ -106,7 +96,7 @@ Module.register("MMM-TankViewer", {
       tdStatus1.className = "status";
       var imgPower1 = document.createElement("img");
       imgPower1.src =
-        this.dataNotification[0].tankStatus === "ON"
+        data[0].status === "ON"
           ? "modules/MMM-TankViewer/img/power-on.png"
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus1.appendChild(imgPower1);
@@ -114,7 +104,7 @@ Module.register("MMM-TankViewer", {
       tdStatus2.className = "status";
       var imgPower2 = document.createElement("img");
       imgPower2.src =
-        this.dataNotification[1].tankStatus === "ON"
+        data[1].status === "ON"
           ? "modules/MMM-TankViewer/img/power-on.png"
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus2.appendChild(imgPower2);
@@ -122,7 +112,7 @@ Module.register("MMM-TankViewer", {
       tdStatus3.className = "status";
       var imgPower3 = document.createElement("img");
       imgPower3.src =
-        this.dataNotification[2].tankStatus === "ON"
+        data[2].status === "ON"
           ? "modules/MMM-TankViewer/img/power-on.png"
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus3.appendChild(imgPower3);
@@ -130,7 +120,7 @@ Module.register("MMM-TankViewer", {
       tdStatus4.className = "status";
       var imgPower4 = document.createElement("img");
       imgPower4.src =
-        this.dataNotification[3].tankStatus === "ON"
+        data[3].status === "ON"
           ? "modules/MMM-TankViewer/img/power-on.png"
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus4.appendChild(imgPower4);
@@ -138,7 +128,7 @@ Module.register("MMM-TankViewer", {
       tdStatus5.className = "status";
       var imgPower5 = document.createElement("img");
       imgPower5.src =
-        this.dataNotification[4].tankStatus === "ON"
+        data[4].status === "ON"
           ? "modules/MMM-TankViewer/img/power-on.png"
           : "modules/MMM-TankViewer/img/power-off.png";
       tdStatus5.appendChild(imgPower5);
@@ -149,19 +139,19 @@ Module.register("MMM-TankViewer", {
       tdCurrent.innerHTML = "Ток:";
       var tdCurrent1 = document.createElement("td");
       tdCurrent1.className = "curr";
-      tdCurrent1.innerHTML = `${this.dataNotification[0].currentValue}, A`;
+      tdCurrent1.innerHTML = `${data[0].current}, A`;
       var tdCurrent2 = document.createElement("td");
       tdCurrent2.className = "curr";
-      tdCurrent2.innerHTML = `${this.dataNotification[1].currentValue}, A`;
+      tdCurrent2.innerHTML = `${data[1].current}, A`;
       var tdCurrent3 = document.createElement("td");
       tdCurrent3.className = "curr";
-      tdCurrent3.innerHTML = `${this.dataNotification[2].currentValue}, A`;
+      tdCurrent3.innerHTML = `${data[2].current}, A`;
       var tdCurrent4 = document.createElement("td");
       tdCurrent4.className = "curr";
-      tdCurrent4.innerHTML = `${this.dataNotification[3].currentValue}, A`;
+      tdCurrent4.innerHTML = `${data[3].current}, A`;
       var tdCurrent5 = document.createElement("td");
       tdCurrent5.className = "curr";
-      tdCurrent5.innerHTML = `${this.dataNotification[4].currentValue}, A`;
+      tdCurrent5.innerHTML = `${data[4].current}, A`;
 
       trHeader.appendChild(tdName);
       trHeader.appendChild(tdName1);
@@ -210,13 +200,6 @@ Module.register("MMM-TankViewer", {
 
   // socketNotificationReceived from helper
   socketNotificationReceived: function (notification, payload) {
-    Log.info(
-      "***> socketNotificationReceived. Notification: " +
-        notification +
-        ", Payload: " +
-        JSON.stringify(payload)
-    );
-
     if (notification === "MMM-TankViewer-WS_RESPONSE") {
       // set dataNotification
       this.dataNotification = payload;
