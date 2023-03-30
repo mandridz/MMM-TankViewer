@@ -29,7 +29,8 @@ Module.register("MMM-TankViewer", {
     var wrapper = document.createElement("div");
 
     if (this.dataNotification) {
-      var data = JSON.parse(this.dataNotification);
+      // TODO: ???
+      var data = this.dataNotification;
 
       var top = document.createElement("div");
       top.classList.add("top");
