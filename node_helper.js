@@ -30,7 +30,6 @@ module.exports = NodeHelper.create({
     const url = "ws://" + config.host + ":" + config.port + config.path;
     self.rws = new ReconnectingWebSocket(url, [], {
       debug: true,
-      reconnectInterval: 3000,
     });
 
     // Register error listener
