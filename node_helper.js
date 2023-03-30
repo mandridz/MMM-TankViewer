@@ -31,6 +31,7 @@ module.exports = NodeHelper.create({
     self.rws = new ReconnectingWebSocket(url, [], {
       debug: true,
       WebSocket: ws,
+      startClosed: true,
     });
 
     // Register error listener
@@ -47,7 +48,7 @@ module.exports = NodeHelper.create({
       // Register on close listener
       self.rws.onclose = function close(event) {
         self.error("Connection was closed!", event.code, event.reason);
-        self.reconnect(config);
+        //self.reconnect(config);
       };
 
       // Register message handler
