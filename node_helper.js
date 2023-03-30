@@ -6,7 +6,8 @@
  */
 
 var NodeHelper = require("node_helper");
-const WebSocket = require("ws");
+//const WebSocket = require("ws");
+const ReconnectingWebSocket = require("reconnecting-websocket");
 
 module.exports = NodeHelper.create({
   // Override socketNotificationReceived method.
@@ -27,7 +28,10 @@ module.exports = NodeHelper.create({
     self.disconnect();
 
     const url = "ws://" + config.host + ":" + config.port + config.path;
-    self.ws = new WebSocket(url);
+    self.ws = new ReconnectingWebSocket(url, null, {
+      debug: true,
+      reconnectInterval: 3000,
+    });
 
     // Register error listener
     self.ws.onerror = function (event) {
