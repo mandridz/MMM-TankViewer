@@ -66,7 +66,10 @@ module.exports = NodeHelper.create({
     var self = this;
     self.debug("Send event: ", event);
     self.debug("Send event JSON: ", JSON.parse(event));
-    self.sendSocketNotification("MMM-TankViewer-WS_RESPONSE", event);
+    self.sendSocketNotification(
+      "MMM-TankViewer-WS_RESPONSE",
+      JSON.parse(event)
+    );
   },
 
   reconnect: function (config) {
