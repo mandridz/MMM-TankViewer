@@ -6,6 +6,7 @@
   "author": "yen",
   "license": "MIT",
   "dependencies": {
+    "reconnecting-websocket": "^4.4.0",
     "ws": "^8.13.0"
   }
 }
