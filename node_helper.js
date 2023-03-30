@@ -6,7 +6,7 @@
  */
 
 var NodeHelper = require("node_helper");
-//const WebSocket = require("ws");
+const WS = require("ws");
 const ReconnectingWebSocket = require("reconnecting-websocket");
 
 module.exports = NodeHelper.create({
@@ -28,7 +28,7 @@ module.exports = NodeHelper.create({
     self.disconnect();
 
     const url = "ws://" + config.host + ":" + config.port + config.path;
-    self.rws = new ReconnectingWebSocket(url);
+    self.rws = new ReconnectingWebSocket(url, [], { WebSocket: WS });
 
     // Register error listener
     self.rws.onerror = function (event) {
