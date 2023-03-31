@@ -56,7 +56,7 @@ Module.register("MMM-TankViewer", {
     const getPumpInfoClassNameByValue = (value, lowValue, middleValue) => {
       let classNme = "";
 
-      if (value != 0 && value <= lowValue) {
+      if (value > 0 && value <= lowValue) {
         classNme = "critical";
       } else if (value > lowValue && value <= middleValue) {
         classNme = "optimum";
