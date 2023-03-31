@@ -84,6 +84,7 @@ Module.register("MMM-TankViewer", {
 
       data.forEach((item) => {
         let tdValue = document.createElement("td");
+        tdValue.className = "status";
         if (property === "status") {
           let imgStatus = document.createElement("img");
           imgStatus.src = item.status
