@@ -8,8 +8,20 @@
   font-size: 14pt;
 }
 
+.critical {
+  color: darkred;
+}
+
+.middle {
+  color: yellow;
+}
+
+.normal {
+  color: green;
+}
+
 .value {
-  text-align: left;
+  text-align: right;
   font-size: 18pt;
   color: #087e82;
 }

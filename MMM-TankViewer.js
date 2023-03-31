@@ -39,19 +39,33 @@ Module.register("MMM-TankViewer", {
         )} / ${date.toLocaleDateString("ru-RU")}]`;
     };
 
+    const getClassNameByValue = (value, criticalValue, middleValue) => {
+      let classNme = "";
+
+      if (value <= classNme) {
+        classNme = "critical";
+      } else if (value > criticalValue && value <= middleValue) {
+        classNme = "middle";
+      } else {
+        classNme = "normal";
+      }
+
+      return classNme;
+    };
+
     const getTankInfo = (label, value) => {
       var tr = document.createElement("tr");
 
       // td label
       var tdLabel = document.createElement("td");
       tdLabel.className = "label";
-      tdLabel.innerHTML = `${label} m`;
+      tdLabel.innerHTML = label;
       tr.appendChild(tdLabel);
 
       //td value
       var tdValue = document.createElement("td");
       tdValue.className = "value";
-      tdValue.innerHTML = `${value} m`;
+      var className = (tdValue.innerHTML = value < 2 ? "" : ""); //    `${value} m`;
       tr.appendChild(tdValue);
 
       return tr;
@@ -71,33 +85,6 @@ Module.register("MMM-TankViewer", {
       );
       tabTanks.appendChild(getTankInfo("Дренажный коллектор", data[4].sonar));
       wrapper.appendChild(tabTanks);
-
-      /*
-      // CanalizationTank
-      var wrapperCanalizationTank = document.createElement("div");
-
-      var labelCanalizationTank = document.createElement("label");
-      labelCanalizationTank.className = "label";
-      labelCanalizationTank.innerHTML = "Канализационный коллектор: ";
-
-      var labelCanalizationTankValue = document.createElement("label");
-      labelCanalizationTankValue.className = "value";
-      labelCanalizationTankValue.innerHTML = data[2].sonar + " m";
-
-      wrapperCanalizationTank.appendChild(labelCanalizationTank);
-      wrapperCanalizationTank.appendChild(labelCanalizationTankValue);
-
-      // DrainageTank
-      var wrapperDrainageTank = document.createElement("div");
-
-      var labelDrainageTank = document.createElement("label");
-      labelDrainageTank.className = "label";
-      labelDrainageTank.innerHTML = "Дренажный коллектор: ";
-
-      var labelDrainageTankValue = document.createElement("label");
-      labelDrainageTankValue.className = "value";
-      labelDrainageTankValue.innerHTML = data[4].sonar + " m";
-       */
 
       // Pump Status
       var tabStatus = document.createElement("table");
@@ -207,12 +194,6 @@ Module.register("MMM-TankViewer", {
       tabStatus.appendChild(trHeader);
       tabStatus.appendChild(trStatus);
       tabStatus.appendChild(trCurrent);
-
-      //wrapperDrainageTank.appendChild(labelDrainageTank);
-      //wrapperDrainageTank.appendChild(labelDrainageTankValue);
-
-      //wrapper.appendChild(wrapperCanalizationTank);
-      //wrapper.appendChild(wrapperDrainageTank);
 
       wrapper.appendChild(tabStatus);
     }
