@@ -84,7 +84,15 @@ Module.register("MMM-TankViewer", {
 
       data.forEach((item) => {
         let tdValue = document.createElement("td");
-        tdValue.innerHTML = item[property];
+        if (property === "status") {
+          let imgStatus = document.createElement("img");
+          imgStatus.src = item.status
+            ? "modules/MMM-TankViewer/img/power-on.png"
+            : "modules/MMM-TankViewer/img/power-off.png";
+          tdValue.appendChild(imgStatus);
+        } else {
+          tdValue.innerHTML = item[property];
+        }
         tr.appendChild(tdValue);
       });
 
@@ -113,7 +121,7 @@ Module.register("MMM-TankViewer", {
       tabPumps.className = "tab";
       tabPumps.appendChild(getPumpInfo("Насос", data, "id"));
       tabPumps.appendChild(getPumpInfo("Статус", data, "status"));
-      tabPumps.appendChild(getPumpInfo("Ток", data, "current"));
+      tabPumps.appendChild(getPumpInfo("Ток, A", data, "current"));
       wrapper.appendChild(tabPumps);
 
       /*
