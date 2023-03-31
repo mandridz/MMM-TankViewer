@@ -15,7 +15,7 @@
 }
 
 .critical {
-  color: darkred;
+  color: red;
   animation: blinker 1s linear infinite;
 }
 
@@ -23,7 +23,7 @@
   color: yellow;
 }
 
-.normal {
+.optimum {
   color: green;
 }
 

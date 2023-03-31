@@ -26,7 +26,7 @@ Module.register("MMM-TankViewer", {
   },
 
   getDom: function () {
-    var wrapper = document.createElement("div");
+    let wrapper = document.createElement("div");
     wrapper.className = "wrapper";
 
     const getHeader = () => {
@@ -47,7 +47,7 @@ Module.register("MMM-TankViewer", {
       } else if (value > criticalValue && value <= middleValue) {
         classNme = "middle";
       } else {
-        classNme = "normal";
+        classNme = "optimum";
       }
 
       return classNme;
@@ -75,14 +75,30 @@ Module.register("MMM-TankViewer", {
       return tr;
     };
 
+    const getPumpInfo = (label, data, property) => {
+      let tr = document.createElement("tr");
+
+      let tdLabel = document.createElement("td");
+      tdLabel.innerHTML = label;
+      tr.appendChild(tdLabel);
+
+      data.forEach((item) => {
+        let tdValue = document.createElement("td");
+        tdValue.innerHTML = item[property];
+        tr.appendChild(tdValue);
+      });
+
+      return tr;
+    };
+
     if (this.dataNotification) {
-      var data = this.dataNotification;
+      let data = this.dataNotification;
 
       // header refresh time
       getHeader();
 
       // table Tanks
-      var tabTanks = document.createElement("table");
+      let tabTanks = document.createElement("table");
       tabTanks.className = "tab";
       tabTanks.appendChild(
         getTankInfo("Канализационный коллектор", data[2].sonar, 1.2, 2)
@@ -92,6 +108,15 @@ Module.register("MMM-TankViewer", {
       );
       wrapper.appendChild(tabTanks);
 
+      // table pumps
+      let tabPumps = document.createElement("table");
+      tabPumps.className = "tab";
+      getPumpInfo("Насос", data, "id");
+      getPumpInfo("Статус", data, "status");
+      getPumpInfo("Ток", data, "current");
+      wrapper.appendChild(tabPumps);
+
+      /*
       // Pump Status
       var tabStatus = document.createElement("table");
       tabStatus.className = "tab";
@@ -202,6 +227,8 @@ Module.register("MMM-TankViewer", {
       tabStatus.appendChild(trCurrent);
 
       wrapper.appendChild(tabStatus);
+
+       */
     }
 
     return wrapper;
