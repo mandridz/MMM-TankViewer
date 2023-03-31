@@ -53,7 +53,7 @@ Module.register("MMM-TankViewer", {
       return classNme;
     };
 
-    const getTankInfo = (label, value) => {
+    const getTankInfo = (label, value, criticalValue, middleValue) => {
       var tr = document.createElement("tr");
 
       // td label
@@ -65,7 +65,7 @@ Module.register("MMM-TankViewer", {
       //td value
       var tdValue = document.createElement("td");
       tdValue.className = "value";
-      var className = (tdValue.innerHTML = value < 2 ? "" : ""); //    `${value} m`;
+      var className = getClassNameByValue(value, criticalValue, middleValue);
       tr.appendChild(tdValue);
 
       return tr;
@@ -81,9 +81,11 @@ Module.register("MMM-TankViewer", {
       var tabTanks = document.createElement("table");
       tabTanks.className = "tab";
       tabTanks.appendChild(
-        getTankInfo("Канализационный коллектор", data[2].sonar)
+        getTankInfo("Канализационный коллектор", data[2].sonar, 1.2, 2)
       );
-      tabTanks.appendChild(getTankInfo("Дренажный коллектор", data[4].sonar));
+      tabTanks.appendChild(
+        getTankInfo("Дренажный коллектор", data[4].sonar, 2, 3.5)
+      );
       wrapper.appendChild(tabTanks);
 
       // Pump Status
