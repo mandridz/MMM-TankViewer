@@ -18,7 +18,7 @@ Module.register("MMM-TankViewer", {
     var self = this;
     var dataNotification = undefined;
 
-    var this.headerText = this.data.header;
+    this.headerText = this.data.header;
     this.data.header = headerText + " [Обновление ...]";
 
     self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", {
