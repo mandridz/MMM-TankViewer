@@ -208,11 +208,11 @@ Module.register("MMM-TankViewer", {
       tabStatus.appendChild(trStatus);
       tabStatus.appendChild(trCurrent);
 
-      wrapperDrainageTank.appendChild(labelDrainageTank);
-      wrapperDrainageTank.appendChild(labelDrainageTankValue);
+      //wrapperDrainageTank.appendChild(labelDrainageTank);
+      //wrapperDrainageTank.appendChild(labelDrainageTankValue);
 
-      wrapper.appendChild(wrapperCanalizationTank);
-      wrapper.appendChild(wrapperDrainageTank);
+      //wrapper.appendChild(wrapperCanalizationTank);
+      //wrapper.appendChild(wrapperDrainageTank);
 
       wrapper.appendChild(tabStatus);
     }
