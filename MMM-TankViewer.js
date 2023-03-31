@@ -64,11 +64,11 @@ Module.register("MMM-TankViewer", {
 
       //td value
       let tdValue = document.createElement("td");
-      tdValue.className = `value ${getClassNameByValue(
+      tdValue.className = getClassNameByValue(
         value,
         criticalValue,
         middleValue
-      )}`;
+      );
       tr.appendChild(tdValue);
 
       return tr;
