@@ -54,18 +54,21 @@ Module.register("MMM-TankViewer", {
     };
 
     const getTankInfo = (label, value, criticalValue, middleValue) => {
-      var tr = document.createElement("tr");
+      let tr = document.createElement("tr");
 
       // td label
-      var tdLabel = document.createElement("td");
+      let tdLabel = document.createElement("td");
       tdLabel.className = "label";
       tdLabel.innerHTML = label;
       tr.appendChild(tdLabel);
 
       //td value
-      var tdValue = document.createElement("td");
-      tdValue.className = "value";
-      var className = getClassNameByValue(value, criticalValue, middleValue);
+      let tdValue = document.createElement("td");
+      tdValue.className = `value ${getClassNameByValue(
+        value,
+        criticalValue,
+        middleValue
+      )}`;
       tr.appendChild(tdValue);
 
       return tr;

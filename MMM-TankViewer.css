@@ -21,9 +21,8 @@
 }
 
 .value {
-  text-align: right;
+  text-align: left;
   font-size: 18pt;
-  color: #087e82;
 }
 
 .tab {
