@@ -25,11 +25,11 @@ module.exports = NodeHelper.create({
     var self = this;
 
     // Disconnect to assure only one instance is running.
-    self.disconnect();
+    //self.disconnect();
 
     const url = "ws://" + config.host + ":" + config.port + config.path;
     self.rws = new ReconnectingWebSocket(url, [], {
-      debug: true,
+      debug: self.config.debug,
       WebSocket: ws,
     });
 
@@ -47,7 +47,6 @@ module.exports = NodeHelper.create({
       // Register on close listener
       self.rws.onclose = function close(event) {
         self.error("Connection was closed!", event.code, event.reason);
-        //self.reconnect(config);
       };
 
       // Register message handler
@@ -70,24 +69,7 @@ module.exports = NodeHelper.create({
     var self = this;
     self.debug(`[${this.name}]: Send event: `, event);
 
-    self.sendSocketNotification(
-      "MMM-TankViewer-WS_RESPONSE",
-      //JSON.stringify(event)
-      event
-    );
-  },
-
-  reconnect: function (config) {
-    var self = this;
-    self.debug("Trying to reconnect...");
-    self.connect(config, function (error) {
-      if (error) {
-        self.error("Error while reconnecting to websocket...", error);
-        setTimeout(function () {
-          self.reconnect(config);
-        }, config.reconnectInterval);
-      }
-    });
+    self.sendSocketNotification("MMM-TankViewer-WS_RESPONSE", event);
   },
 
   disconnect: function () {
