@@ -111,9 +111,9 @@ Module.register("MMM-TankViewer", {
       // table pumps
       let tabPumps = document.createElement("table");
       tabPumps.className = "tab";
-      getPumpInfo("Насос", data, "id");
-      getPumpInfo("Статус", data, "status");
-      getPumpInfo("Ток", data, "current");
+      tabPumps.appendChild(getPumpInfo("Насос", data, "id"));
+      tabPumps.appendChild(getPumpInfo("Статус", data, "status"));
+      tabPumps.appendChild(getPumpInfo("Ток", data, "current"));
       wrapper.appendChild(tabPumps);
 
       /*
