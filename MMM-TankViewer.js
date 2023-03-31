@@ -39,15 +39,29 @@ Module.register("MMM-TankViewer", {
         )} / ${date.toLocaleDateString("ru-RU")}]`;
     };
 
-    const getClassNameByValue = (value, criticalValue, middleValue) => {
+    const getTankInfoClassNameByValue = (value, criticalValue, middleValue) => {
       let classNme = "";
 
-      if (value <= classNme) {
+      if (value <= criticalValue) {
         classNme = "critical";
       } else if (value > criticalValue && value <= middleValue) {
         classNme = "middle";
       } else {
         classNme = "optimum";
+      }
+
+      return classNme;
+    };
+
+    const getPumpInfoClassNameByValue = (value, lowValue, middleValue) => {
+      let classNme = "";
+
+      if (value <= lowValue) {
+        classNme = "critical";
+      } else if (value > lowValue && value <= middleValue) {
+        classNme = "optimum";
+      } else {
+        classNme = "critical";
       }
 
       return classNme;
@@ -64,7 +78,7 @@ Module.register("MMM-TankViewer", {
 
       //td value
       let tdValue = document.createElement("td");
-      tdValue.className = `value ${getClassNameByValue(
+      tdValue.className = `value ${getTankInfoClassNameByValue(
         value,
         criticalValue,
         middleValue
@@ -75,7 +89,7 @@ Module.register("MMM-TankViewer", {
       return tr;
     };
 
-    const getPumpInfo = (label, data, property) => {
+    const getPumpInfo = (label, data, property, lowValue, middleValue) => {
       let tr = document.createElement("tr");
 
       let tdLabel = document.createElement("td");
@@ -91,6 +105,14 @@ Module.register("MMM-TankViewer", {
             ? "modules/MMM-TankViewer/img/power-on.png"
             : "modules/MMM-TankViewer/img/power-off.png";
           tdValue.appendChild(imgStatus);
+        }
+        if (property === "current") {
+          tdValue.className = getPumpInfoClassNameByValue(
+            item[property],
+            3,
+            10
+          );
+          tdValue.innerHTML = item[property];
         } else {
           tdValue.innerHTML = item[property];
         }
@@ -122,122 +144,8 @@ Module.register("MMM-TankViewer", {
       tabPumps.className = "tab";
       tabPumps.appendChild(getPumpInfo("Насос", data, "id"));
       tabPumps.appendChild(getPumpInfo("Статус", data, "status"));
-      tabPumps.appendChild(getPumpInfo("Ток, A", data, "current"));
+      tabPumps.appendChild(getPumpInfo("Ток, A", data, "current", 3, 10));
       wrapper.appendChild(tabPumps);
-
-      /*
-      // Pump Status
-      var tabStatus = document.createElement("table");
-      tabStatus.className = "tab";
-
-      var trHeader = document.createElement("tr");
-      var tdName = document.createElement("td");
-      tdName.className = "header-left";
-      tdName.innerHTML = "Насос:";
-      var tdName1 = document.createElement("td");
-      tdName1.className = "header";
-      tdName1.innerHTML = "1";
-      var tdName2 = document.createElement("td");
-      tdName2.className = "header";
-      tdName2.innerHTML = "2";
-      var tdName3 = document.createElement("td");
-      tdName3.className = "header";
-      tdName3.innerHTML = "3";
-      var tdName4 = document.createElement("td");
-      tdName4.className = "header";
-      tdName4.innerHTML = "4";
-      var tdName5 = document.createElement("td");
-      tdName5.className = "header";
-      tdName5.innerHTML = "5";
-
-      var trStatus = document.createElement("tr");
-      var tdStatus = document.createElement("td");
-      tdStatus.className = "status-left";
-      tdStatus.innerHTML = "Статус:";
-      var tdStatus1 = document.createElement("td");
-      tdStatus1.className = "status";
-      var imgPower1 = document.createElement("img");
-      imgPower1.src = data[0].status
-        ? "modules/MMM-TankViewer/img/power-on.png"
-        : "modules/MMM-TankViewer/img/power-off.png";
-      tdStatus1.appendChild(imgPower1);
-      var tdStatus2 = document.createElement("td");
-      tdStatus2.className = "status";
-      var imgPower2 = document.createElement("img");
-      imgPower2.src = data[1].status
-        ? "modules/MMM-TankViewer/img/power-on.png"
-        : "modules/MMM-TankViewer/img/power-off.png";
-      tdStatus2.appendChild(imgPower2);
-      var tdStatus3 = document.createElement("td");
-      tdStatus3.className = "status";
-      var imgPower3 = document.createElement("img");
-      imgPower3.src = data[2].status
-        ? "modules/MMM-TankViewer/img/power-on.png"
-        : "modules/MMM-TankViewer/img/power-off.png";
-      tdStatus3.appendChild(imgPower3);
-      var tdStatus4 = document.createElement("td");
-      tdStatus4.className = "status";
-      var imgPower4 = document.createElement("img");
-      imgPower4.src = data[3].status
-        ? "modules/MMM-TankViewer/img/power-on.png"
-        : "modules/MMM-TankViewer/img/power-off.png";
-      tdStatus4.appendChild(imgPower4);
-      var tdStatus5 = document.createElement("td");
-      tdStatus5.className = "status";
-      var imgPower5 = document.createElement("img");
-      imgPower5.src = data[4].status
-        ? "modules/MMM-TankViewer/img/power-on.png"
-        : "modules/MMM-TankViewer/img/power-off.png";
-      tdStatus5.appendChild(imgPower5);
-
-      var trCurrent = document.createElement("tr");
-      var tdCurrent = document.createElement("td");
-      tdCurrent.className = "curr-left";
-      tdCurrent.innerHTML = "Ток:";
-      var tdCurrent1 = document.createElement("td");
-      tdCurrent1.className = "curr";
-      tdCurrent1.innerHTML = `${data[0].current}, A`;
-      var tdCurrent2 = document.createElement("td");
-      tdCurrent2.className = "curr";
-      tdCurrent2.innerHTML = `${data[1].current}, A`;
-      var tdCurrent3 = document.createElement("td");
-      tdCurrent3.className = "curr";
-      tdCurrent3.innerHTML = `${data[2].current}, A`;
-      var tdCurrent4 = document.createElement("td");
-      tdCurrent4.className = "curr";
-      tdCurrent4.innerHTML = `${data[3].current}, A`;
-      var tdCurrent5 = document.createElement("td");
-      tdCurrent5.className = "curr";
-      tdCurrent5.innerHTML = `${data[4].current}, A`;
-
-      trHeader.appendChild(tdName);
-      trHeader.appendChild(tdName1);
-      trHeader.appendChild(tdName2);
-      trHeader.appendChild(tdName3);
-      trHeader.appendChild(tdName4);
-      trHeader.appendChild(tdName5);
-
-      trStatus.appendChild(tdStatus);
-      trStatus.appendChild(tdStatus1);
-      trStatus.appendChild(tdStatus2);
-      trStatus.appendChild(tdStatus3);
-      trStatus.appendChild(tdStatus4);
-      trStatus.appendChild(tdStatus5);
-
-      trCurrent.appendChild(tdCurrent);
-      trCurrent.appendChild(tdCurrent1);
-      trCurrent.appendChild(tdCurrent2);
-      trCurrent.appendChild(tdCurrent3);
-      trCurrent.appendChild(tdCurrent4);
-      trCurrent.appendChild(tdCurrent5);
-
-      tabStatus.appendChild(trHeader);
-      tabStatus.appendChild(trStatus);
-      tabStatus.appendChild(trCurrent);
-
-      wrapper.appendChild(tabStatus);
-
-       */
     }
 
     return wrapper;
