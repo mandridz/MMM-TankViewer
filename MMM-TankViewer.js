@@ -56,9 +56,9 @@ Module.register("MMM-TankViewer", {
     const getPumpInfoClassNameByValue = (value, lowValue, middleValue) => {
       let classNme = "";
 
-      if (value <= lowValue) {
+      if (value != 0 && value <= lowValue) {
         classNme = "critical";
-      } else if (value > lowValue && value <= middleValue) {
+      } else if (value == 0 || (value > lowValue && value <= middleValue)) {
         classNme = "optimum";
       } else {
         classNme = "critical";
@@ -107,7 +107,7 @@ Module.register("MMM-TankViewer", {
           tdValue.appendChild(imgStatus);
         }
         if (property === "current") {
-          tdValue.className = getPumpInfoClassNameByValue(
+          tdValue.className += getPumpInfoClassNameByValue(
             item[property],
             3,
             10
