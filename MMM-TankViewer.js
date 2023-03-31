@@ -45,7 +45,7 @@ Module.register("MMM-TankViewer", {
       var data = this.dataNotification;
 
       this.data.header =
-        this.headerText +
+        this.data.header +
         `[Обновлено: ${date.toLocaleTimeString(
           "ru-RU"
         )} / ${date.toLocaleDateString("ru-RU")}]`;
