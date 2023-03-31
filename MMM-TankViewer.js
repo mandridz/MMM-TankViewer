@@ -18,13 +18,15 @@ Module.register("MMM-TankViewer", {
     var self = this;
     var dataNotification = undefined;
 
+    this.data.header = this.config.header + "Something";
+
     self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", {
       config: self.config,
     });
   },
 
   getDom: function () {
-    this.data.header = "Something";
+    this.data.header = this.config.header + "Some text";
 
     var wrapper = document.createElement("div");
     wrapper.className = "wrapper";
@@ -35,8 +37,6 @@ Module.register("MMM-TankViewer", {
 
       return wrapper;
     }
-
-    //FIXME: Test
 
     const date = new Date();
 
