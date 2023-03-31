@@ -106,7 +106,11 @@ Module.register("MMM-TankViewer", {
             : "modules/MMM-TankViewer/img/power-off.png";
           tdValue.appendChild(imgStatus);
         } else if (property === "current") {
-          tdValue.className += getPumpInfoClassNameByValue(item.current, 3, 10);
+          tdValue.className += ` ${getPumpInfoClassNameByValue(
+            item.current,
+            3,
+            10
+          )}`;
           tdValue.innerHTML = item[property];
         } else {
           tdValue.innerHTML = item[property];
