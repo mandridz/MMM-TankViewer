@@ -18,7 +18,7 @@ Module.register("MMM-TankViewer", {
     var self = this;
     var dataNotification = undefined;
 
-    var headerText = this.data.header;
+    var this.headerText = this.data.header;
     this.data.header = headerText + " [Обновление ...]";
 
     self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", {
@@ -45,7 +45,7 @@ Module.register("MMM-TankViewer", {
       var data = this.dataNotification;
 
       this.data.header =
-        headerText +
+        this.headerText +
         `[Обновлено: ${date.toLocaleTimeString(
           "ru-RU"
         )} / ${date.toLocaleDateString("ru-RU")}]`;
