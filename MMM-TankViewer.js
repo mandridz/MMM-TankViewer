@@ -24,9 +24,21 @@ Module.register("MMM-TankViewer", {
   },
 
   getDom: function () {
-    const date = new Date();
+    this.data.header = "Something";
 
     var wrapper = document.createElement("div");
+    wrapper.className = "wrapper";
+
+    if (!this.loaded) {
+      wrapper.classList.add("top");
+      wrapper.innerHTML = this.translate("Обновление ...");
+
+      return wrapper;
+    }
+
+    //FIXME: Test
+
+    const date = new Date();
 
     if (this.dataNotification) {
       var data = this.dataNotification;
@@ -198,6 +210,7 @@ Module.register("MMM-TankViewer", {
     if (notification === "MMM-TankViewer-WS_RESPONSE") {
       // set dataNotification
       this.dataNotification = payload;
+      this.loaded = true;
       this.updateDom();
     }
   },
