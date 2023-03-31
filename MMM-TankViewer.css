@@ -15,7 +15,7 @@
 }
 
 .critical {
-  color: orange;
+  color: red;
   animation: blinker 1s linear infinite;
 }
 
