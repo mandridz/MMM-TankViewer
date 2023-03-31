@@ -58,9 +58,9 @@ Module.register("MMM-TankViewer", {
 
       if (value != 0 && value <= lowValue) {
         classNme = "critical";
-      } else if (value == 0 || (value > lowValue && value <= middleValue)) {
+      } else if (value > lowValue && value <= middleValue) {
         classNme = "optimum";
-      } else {
+      } else if (value > middleValue) {
         classNme = "critical";
       }
 
