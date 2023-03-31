@@ -12,14 +12,13 @@ Module.register("MMM-TankViewer", {
     debug: false,
   },
 
-  requiresVersion: "2.1.0", // Required version of MagicMirror
+  requiresVersion: "2.1.0",
 
   start: function () {
     var self = this;
     var dataNotification = undefined;
-    var headerText = this.data.header;
 
-    this.data.header = headerText + " [Обновление ...]";
+    this.data.header = this.config.headerText + " [Обновление ...]";
 
     self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", {
       config: self.config,
@@ -45,8 +44,8 @@ Module.register("MMM-TankViewer", {
       var data = this.dataNotification;
 
       this.data.header =
-        this.data.header +
-        `[Обновлено: ${date.toLocaleTimeString(
+        this.config.headerText +
+        ` [Обновлено: ${date.toLocaleTimeString(
           "ru-RU"
         )} / ${date.toLocaleDateString("ru-RU")}]`;
 
