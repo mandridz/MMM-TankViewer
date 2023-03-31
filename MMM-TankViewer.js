@@ -29,37 +29,50 @@ Module.register("MMM-TankViewer", {
     var wrapper = document.createElement("div");
     wrapper.className = "wrapper";
 
-    /*
-    if (!this.loaded) {
-      wrapper.classList.add("top");
-      wrapper.innerHTML = this.translate("Обновление ...");
-
-      return wrapper;
-    }
-     */
-
-    const date = new Date();
-
-    if (this.dataNotification) {
-      var data = this.dataNotification;
+    const getHeader = () => {
+      const date = new Date();
 
       this.data.header =
         this.config.headerText +
         ` [Обновлено: ${date.toLocaleTimeString(
           "ru-RU"
         )} / ${date.toLocaleDateString("ru-RU")}]`;
+    };
+
+    const getTankInfo = (label, value) => {
+      var tr = document.createElement("tr");
+
+      // td label
+      var tdLabel = document.createElement("td");
+      tdLabel.className = "label";
+      tdLabel.innerHTML = `${label} m`;
+      tr.appendChild(tdLabel);
+
+      //td value
+      var tdValue = document.createElement("td");
+      tdValue.className = "value";
+      tdValue.innerHTML = `${value} m`;
+      tr.appendChild(tdValue);
+
+      return tr;
+    };
+
+    if (this.dataNotification) {
+      var data = this.dataNotification;
+
+      // header refresh time
+      getHeader();
+
+      // table Tanks
+      var tabTanks = document.createElement("table");
+      tabTanks.className = "tab";
+      tabTanks.appendChild(
+        getTankInfo("Канализационный коллектор", data[2].sonar)
+      );
+      tabTanks.appendChild(getTankInfo("Дренажный коллектор", data[4].sonar));
+      wrapper.appendChild(tabTanks);
 
       /*
-      var top = document.createElement("div");
-      top.classList.add("top");
-      top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
-        "ru-RU"
-      )} / ${date.toLocaleDateString("ru-RU")}`;
-
-      wrapper.appendChild(top);
-
-       */
-
       // CanalizationTank
       var wrapperCanalizationTank = document.createElement("div");
 
@@ -84,6 +97,7 @@ Module.register("MMM-TankViewer", {
       var labelDrainageTankValue = document.createElement("label");
       labelDrainageTankValue.className = "value";
       labelDrainageTankValue.innerHTML = data[4].sonar + " m";
+       */
 
       // Pump Status
       var tabStatus = document.createElement("table");

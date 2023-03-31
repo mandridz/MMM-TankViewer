@@ -4,10 +4,12 @@
 }
 
 .label {
+  text-align: left;
   font-size: 14pt;
 }
 
 .value {
+  text-align: left;
   font-size: 18pt;
   color: #087e82;
 }
