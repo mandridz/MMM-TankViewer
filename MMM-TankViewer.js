@@ -18,7 +18,7 @@ Module.register("MMM-TankViewer", {
     var self = this;
     var dataNotification = undefined;
 
-    this.data.header = this.config.header + "Something";
+    this.data.header = this.header + " [Something]";
 
     self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", {
       config: self.config,
@@ -26,7 +26,7 @@ Module.register("MMM-TankViewer", {
   },
 
   getDom: function () {
-    this.data.header = this.config.header + "Some text";
+    this.data.header = this.header + " [Some text]";
 
     var wrapper = document.createElement("div");
     wrapper.className = "wrapper";
