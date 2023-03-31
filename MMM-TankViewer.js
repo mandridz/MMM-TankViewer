@@ -14,7 +14,17 @@ Module.register("MMM-TankViewer", {
 
   requiresVersion: "2.1.0",
 
+  getScripts: function () {
+    return [];
+  },
+
+  getStyles: function () {
+    return ["MMM-TankViewer.css"];
+  },
+
   start: function () {
+    Log.info("Starting module: " + this.name);
+
     var self = this;
     var dataNotification = undefined;
 
@@ -39,13 +49,13 @@ Module.register("MMM-TankViewer", {
         )} / ${date.toLocaleDateString("ru-RU")}]`;
     };
 
-    const getTankInfoClassNameByValue = (value, criticalValue, middleValue) => {
+    const getTankInfoClassNameByValue = (value, criticalValue, normalValue) => {
       let classNme = "";
 
       if (value <= criticalValue) {
         classNme = "critical";
-      } else if (value > criticalValue && value <= middleValue) {
-        classNme = "middle";
+      } else if (value > criticalValue && value <= normalValue) {
+        classNme = "sub-critical";
       } else {
         classNme = "optimum";
       }
@@ -53,21 +63,21 @@ Module.register("MMM-TankViewer", {
       return classNme;
     };
 
-    const getPumpInfoClassNameByValue = (value, lowValue, middleValue) => {
+    const getPumpInfoClassNameByValue = (value, criticalValue, normalValue) => {
       let classNme = "";
 
-      if (value > 0 && value <= lowValue) {
+      if (value > 0 && value <= criticalValue) {
         classNme = "critical";
-      } else if (value > lowValue && value <= middleValue) {
+      } else if (value > criticalValue && value <= normalValue) {
         classNme = "optimum";
-      } else if (value > middleValue) {
+      } else if (value > normalValue) {
         classNme = "critical";
       }
 
       return classNme;
     };
 
-    const getTankInfo = (label, value, criticalValue, middleValue) => {
+    const getTankInfo = (label, value, criticalValue, normalValue) => {
       let tr = document.createElement("tr");
 
       // td label
@@ -81,7 +91,7 @@ Module.register("MMM-TankViewer", {
       tdValue.className = `value ${getTankInfoClassNameByValue(
         value,
         criticalValue,
-        middleValue
+        normalValue
       )}`;
       tdValue.innerHTML = `${value} m`;
       tr.appendChild(tdValue);
@@ -89,7 +99,7 @@ Module.register("MMM-TankViewer", {
       return tr;
     };
 
-    const getPumpInfo = (label, data, property, lowValue, middleValue) => {
+    const getPumpInfo = (label, data, property, criticalValue, normalValue) => {
       let tr = document.createElement("tr");
 
       let tdLabel = document.createElement("td");
@@ -108,8 +118,8 @@ Module.register("MMM-TankViewer", {
         } else if (property === "current") {
           tdValue.className += ` ${getPumpInfoClassNameByValue(
             item.current,
-            3,
-            10
+            criticalValue,
+            normalValue
           )}`;
           tdValue.innerHTML = item[property];
         } else {
@@ -131,10 +141,20 @@ Module.register("MMM-TankViewer", {
       let tabTanks = document.createElement("table");
       tabTanks.className = "tab";
       tabTanks.appendChild(
-        getTankInfo("Канализационный коллектор", data[2].sonar, 1.2, 2)
+        getTankInfo(
+          "Канализационный коллектор",
+          data[2].sonar,
+          this.config.criticalDeepSewerValue,
+          this.config.normalDeepSewerValue
+        )
       );
       tabTanks.appendChild(
-        getTankInfo("Дренажный коллектор", data[4].sonar, 2, 3.5)
+        getTankInfo(
+          "Дренажный коллектор",
+          data[4].sonar,
+          this.config.criticalDeepDrainValue,
+          this.config.normalDeepDrainValue
+        )
       );
       wrapper.appendChild(tabTanks);
 
@@ -143,19 +163,19 @@ Module.register("MMM-TankViewer", {
       tabPumps.className = "tab";
       tabPumps.appendChild(getPumpInfo("Насос", data, "id"));
       tabPumps.appendChild(getPumpInfo("Статус", data, "status"));
-      tabPumps.appendChild(getPumpInfo("Ток, A", data, "current", 3, 10));
+      tabPumps.appendChild(
+        getPumpInfo(
+          "Ток, A",
+          data,
+          "current",
+          this.config.criticalCurrentValue,
+          this.config.normakCurrentValue
+        )
+      );
       wrapper.appendChild(tabPumps);
     }
 
     return wrapper;
-  },
-
-  getScripts: function () {
-    return [];
-  },
-
-  getStyles: function () {
-    return ["MMM-TankViewer.css"];
   },
 
   // socketNotificationReceived from helper
@@ -163,7 +183,6 @@ Module.register("MMM-TankViewer", {
     if (notification === "MMM-TankViewer-WS_RESPONSE") {
       // set dataNotification
       this.dataNotification = payload;
-      this.loaded = true;
       this.updateDom();
     }
   },

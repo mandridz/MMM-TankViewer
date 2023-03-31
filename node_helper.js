@@ -1,5 +1,5 @@
 /* Magic Mirror
- * Node Helper: MMM-TankViewer2
+ * Node Helper: MMM-TankViewer
  *
  * By yen
  * MIT Licensed.
@@ -23,9 +23,6 @@ module.exports = NodeHelper.create({
 
   connect: function (config, callback) {
     var self = this;
-
-    // Disconnect to assure only one instance is running.
-    //self.disconnect();
 
     const url = "ws://" + config.host + ":" + config.port + config.path;
     self.rws = new ReconnectingWebSocket(url, [], {
@@ -70,23 +67,6 @@ module.exports = NodeHelper.create({
     self.debug(`[${this.name}]: Send event: `, event);
 
     self.sendSocketNotification("MMM-TankViewer-WS_RESPONSE", event);
-  },
-
-  disconnect: function () {
-    var self = this;
-    if (self.rws) {
-      // Unregister listener
-      self.rws.onclose = undefined;
-      self.rws.onerror = undefined;
-      self.rws.onopen = undefined;
-      self.rws.onmessage = undefined;
-
-      if (self.rws.readyState === WebSocket.OPEN) {
-        self.rws.close();
-        self.rws.terminate();
-      }
-      self.rws = undefined;
-    }
   },
 
   debug: function () {
