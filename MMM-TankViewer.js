@@ -19,7 +19,7 @@ Module.register("MMM-TankViewer", {
     var dataNotification = undefined;
 
     var headerText = this.data.header;
-    this.data.header = headerText + " [Something]";
+    this.data.header = headerText + " [Обновление ...]";
 
     self.sendSocketNotification("MMM-TankViewer-WS_CONNECT", {
       config: self.config,
@@ -27,23 +27,30 @@ Module.register("MMM-TankViewer", {
   },
 
   getDom: function () {
-    this.data.header = this.headerText + " [Some text]";
-
     var wrapper = document.createElement("div");
     wrapper.className = "wrapper";
 
+    /*
     if (!this.loaded) {
       wrapper.classList.add("top");
       wrapper.innerHTML = this.translate("Обновление ...");
 
       return wrapper;
     }
+     */
 
     const date = new Date();
 
     if (this.dataNotification) {
       var data = this.dataNotification;
 
+      this.data.header =
+        headerText +
+        `[Обновлено: ${date.toLocaleTimeString(
+          "ru-RU"
+        )} / ${date.toLocaleDateString("ru-RU")}]`;
+
+      /*
       var top = document.createElement("div");
       top.classList.add("top");
       top.innerHTML = `Обновлено: ${date.toLocaleTimeString(
@@ -51,6 +58,8 @@ Module.register("MMM-TankViewer", {
       )} / ${date.toLocaleDateString("ru-RU")}`;
 
       wrapper.appendChild(top);
+
+       */
 
       // CanalizationTank
       var wrapperCanalizationTank = document.createElement("div");
